@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Download Catalogues</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #000;
+    color: white;
+    min-height: 100%;
+  }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Center card horizontally only */
+  .card-custom {
+    background-color: #212529cc;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 255, 128, 0.4);
+    padding: 40px 30px;
+    text-align: center;
+    width: 90%;
+    max-width: 900px;
+    margin: 50px auto;
+    animation: float 4s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .btn-custom {
+    padding: 15px 25px;
+    font-size: 18px;
+    border-radius: 50px;
+    transition: 0.3s;
+    margin-bottom: 20px;
+  }
+
+  .btn-custom:hover {
+    background-color: #198754;
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+  .icon-download {
+    font-size: 22px;
+    margin-right: 10px;
+  }
+
+  h2 {
+    font-weight: 700;
+    margin-bottom: 30px;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+
+  h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  img.catalogue-img {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  img.catalogue-img.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="card-custom">
+  <h2><i class="bi bi-folder2-open"></i> Download Catalogues</h2>
+  <p>Click buttons to download ZIPs or scroll to view images.</p>
+
+  <div class="d-grid gap-3">
+    <a href="Catalouge-Bun_compressed.pdf" class="btn btn-success btn-custom" download>
+      <i class="bi bi-download icon-download"></i>Download Bun Catalogue 
+    </a>
+    <a href="Catalouge-Mi_compressed.pdf" class="btn btn-success btn-custom" download>
+      <i class="bi bi-download icon-download"></i> Download Mi Catalogue ZIP
+    </a>
+  </div>
+
+  <!-- Bun Catalogue -->
+  <h3>Bun Catalogue</h3>
+  <div>
+    <img src="pdf/Catalouge-Bun_compressed/Catalouge-Bun_compressed-01.png" class="catalogue-img" alt="Bun Page 1">
+    <img src="pdf/Catalouge-Bun_compressed/Catalouge-Bun_compressed-02.png" class="catalogue-img" alt="Bun Page 2">
+    <img src="pdf/Catalouge-Bun_compressed/Catalouge-Bun_compressed-03.png" class="catalogue-img" alt="Bun Page 3">
+    <img src="pdf/Catalouge-Bun_compressed/Catalouge-Bun_compressed-04.png" class="catalogue-img" alt="Bun Page 4">
+    <img src="pdf/Catalouge-Bun_compressed/Catalouge-Bun_compressed-05.png" class="catalogue-img" alt="Bun Page 5">
+    <img src="pdf/Catalouge-Bun_compressed/Catalouge-Bun_compressed-06.png" class="catalogue-img" alt="Bun Page 6">
+    <img src="pdf/Catalouge-Bun_compressed/Catalouge-Bun_compressed-07.png" class="catalogue-img" alt="Bun Page 7">
+    <img src="pdf/Catalouge-Bun_compressed/Catalouge-Bun_compressed-08.png" class="catalogue-img" alt="Bun Page 8">
+    <img src="pdf/Catalouge-Bun_compressed/Catalouge-Bun_compressed-09.png" class="catalogue-img" alt="Bun Page 9">
+    <img src="pdf/Catalouge-Bun_compressed/Catalouge-Bun_compressed-10.png" class="catalogue-img" alt="Bun Page 10">
+  </div>
+
+  <!-- Mi Catalogue -->
+  <h3>Mì Catalogue</h3>
+  <div class="d-flex flex-column align-items-center gap-3">
+    <img src="pdf/Catalouge-Mi_compressed/Catalouge-Mi_compressed-1.png" class="catalogue-img" alt="Mi Page 1">
+    <img src="pdf/Catalouge-Mi_compressed/Catalouge-Mi_compressed-2.png" class="catalogue-img" alt="Mi Page 2">
+    <img src="pdf/Catalouge-Mi_compressed/Catalouge-Mi_compressed-3.png" class="catalogue-img" alt="Mi Page 3">
+    <img src="pdf/Catalouge-Mi_compressed/Catalouge-Mi_compressed-4.png" class="catalogue-img" alt="Mi Page 4">
+    <img src="pdf/Catalouge-Mi_compressed/Catalouge-Mi_compressed-5.png" class="catalogue-img" alt="Mi Page 5">
+    <img src="pdf/Catalouge-Mi_compressed/Catalouge-Mi_compressed-6.png" class="catalogue-img" alt="Mi Page 6">
+    <img src="pdf/Catalouge-Mi_compressed/Catalouge-Mi_compressed-7.png" class="catalogue-img" alt="Mi Page 7">
+    <img src="pdf/Catalouge-Mi_compressed/Catalouge-Mi_compressed-8.png" class="catalogue-img" alt="Mi Page 8">
+  </div>
+</div>
+
+<script>
+  // Starry background
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let stars = [];
+  let hue = 0;
+  for (let i = 0; i < 150; i++) {
+    stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, radius: Math.random()*1.5+0.5, dx: (Math.random()-0.5)*0.5, dy: (Math.random()-0.5)*0.5 });
+  }
+
+  function drawStars() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    hue+=0.5; if(hue>=360) hue=0;
+    for(let s of stars){
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.radius,0,Math.PI*2);
+      ctx.fillStyle=`hsl(${hue},100%,70%)`;
+      ctx.shadowColor=`hsl(${hue},100%,70%)`;
+      ctx.shadowBlur=8;
+      ctx.fill();
+      s.x+=s.dx; s.y+=s.dy;
+      if(s.x<0||s.x>canvas.width)s.dx*=-1;
+      if(s.y<0||s.y>canvas.height)s.dy*=-1;
+    }
+    for(let i=0;i<stars.length;i++){
+      for(let j=i+1;j<stars.length;j++){
+        const dx=stars[i].x-stars[j].x, dy=stars[i].y-stars[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<100){
+          ctx.beginPath();
+          ctx.strokeStyle=`hsla(${hue},100%,75%,${1-dist/100})`;
+          ctx.moveTo(stars[i].x,stars[i].y);
+          ctx.lineTo(stars[j].x,stars[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(drawStars);
+  }
+  drawStars();
+  window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
+  // Fade-in images
+  const images = document.querySelectorAll('.catalogue-img');
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, {threshold: 0.1});
+  images.forEach(img=>observer.observe(img));
+</script>
+
+</body>
+</html>

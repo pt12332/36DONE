@@ -1,0 +1,286 @@
+body {
+    margin: 0;
+    background-color: #000000;
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* Ảnh nền cho cả banner */
+.banner {
+    position: relative;
+    height: 100vh;
+    background-image: url('IMG/LOGO1.png');
+    /* Đường dẫn ảnh */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/* Lớp phủ tối giúp nội dung nổi bật hơn */
+.banner::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.1);
+    /* nền mờ trắng trong suốt */
+    backdrop-filter: blur(10px);
+    /* hiệu ứng làm mờ nền sau */
+    -webkit-backdrop-filter: blur(10px);
+    /* hỗ trợ Safari */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    /* đường kẻ nhẹ */
+    z-index: 10;
+}
+
+
+
+.movie-poster {
+    width: 180px;
+    height: 270px;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform 0.3s;
+}
+
+.movie-poster:hover {
+    transform: scale(1.08);
+}
+
+.movie-slider {
+    scroll-behavior: smooth;
+    gap: 40px;
+    overflow-x: hidden;
+}
+
+.movie-item {
+    flex: 0 0 calc(20% - 40px);
+    transition: transform 0.4s ease;
+    position: relative;
+}
+
+.item-1:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px 4px rgba(255, 0, 0, 0.7); /* Đỏ */
+}
+
+.item-2:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px 4px rgba(186, 161, 21, 0.7); /* Cam */
+}
+
+.item-3:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px 4px rgba(169, 20, 255, 0.884); /* Xanh dương */
+}
+
+.item-4:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px 4px rgba(30, 255, 0, 0.7); /* Tím */
+}
+
+.item-5:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px 4px rgba(0, 179, 255, 0.7); /* Xanh ngọc */
+}
+
+.item-6:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px 4px rgba(255, 140, 0, 0.7); /* Vàng */
+}
+
+.item-7:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px 4px rgba(171, 244, 93, 0.7); /* Vàng */
+}
+
+.item-8:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px 4px rgba(21, 255, 0, 0.7); /* Vàng */
+}
+.item-9:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px 4px rgb(16, 103, 5); /* Vàng */
+}
+.item-10:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px 4px rgba(255, 140, 0, 0.87); /* Vàng */
+}
+
+
+.movie-img {
+    width: 100%;
+    height: 378px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.movie-rank {
+    position: absolute;
+    bottom: 88px;
+    left: -18px;
+    font-size: 80px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px #000;
+    z-index: 2;
+}
+
+.left-btn {
+    left: -10px;
+}
+
+/* Container cho phép phần tử con tràn ra ngoài (để nút không bị cắt)  */
+.movie-section .container {
+    overflow: visible;
+    /* quan trọng */
+}
+
+/* Nút điều hướng chung */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000;
+    /* mũi tên màu đen */
+    border: none;
+    height: 120px;
+    /* cao hơn */
+    border-radius: 20px;
+    /* bo góc nhưng không tròn */
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    z-index: 10;
+}
+
+
+/* Hiệu ứng hover nhẹ */
+.slider-btn:hover {
+    background-color: rgba(200, 200, 200, 0.556);
+}
+
+/* Đẩy nút ra ngoài vùng poster – tuỳ ý chỉnh giá trị âm / dương  */
+.left-btn {
+    left: -30px;
+}
+
+/* xa hơn 60 px bên ngoài */
+.right-btn {
+    right: -30px;
+}
+
+/* Ẩn bớt nút trên màn hình hẹp và đưa vào trong một chút */
+@media (max-width: 768px) {
+    .left-btn {
+        left: -30px;
+    }
+
+    .right-btn {
+        right: -30px;
+    }
+
+    .slider-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+    }
+}
+
+.text-glow {
+    color: white;
+    text-shadow: 0 0 3px #ccc,
+        0 0 6px #eee,
+        0 0 10px #fff,
+         0 0 20px #fff;
+}
+.cool-banner {
+    position: relative;
+    height: 100vh;
+    background: url('IMG/LOGO1.png') center/cover no-repeat;
+    overflow: hidden;
+}
+
+/* Dark overlay with animated gradient */
+.cool-banner .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.7), rgba(0,0,0,0.95));
+    animation: overlayFade 2s ease forwards;
+    z-index: 2;
+}
+
+@keyframes overlayFade {
+    0% { opacity: 1; }
+    100% { opacity: 0.2; }
+}
+
+/* Text styling */
+.cool-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    text-shadow: 0 0 30px gold, 0 0 60px rgba(255,215,0,0.6);
+    transform: scale(0.5) translateY(50px);
+    opacity: 0;
+    animation: titleReveal 3s ease forwards 1s; /* Slower fade-in */
+}
+
+@keyframes titleReveal {
+    0% {
+        transform: scale(0.5) translateY(50px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1; /* Fully visible and stays */
+    }
+}
+
+
+/* Canvas particles */
+#goldParticles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>36food</title>
+    <!-- Favicon -->
+    <link rel="icon" href="IMG/LOGO.jpg" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+
+        <style>
+        .nav-link {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+        }
+
+        /* Movie slider styles */
+        .movie-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 16px;
+            padding-bottom: 10px;
+        }
+
+        .movie-item {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            width: 220px;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .movie-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Dropdown menu background blur */
+        .dropdown-blur {
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 8px;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Product section */
+        .product-section {
+            padding: 50px 20px;
+        }
+
+        .card-img-top {
+            height: 340px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+
+        /* ONLY animate collapse on mobile */
+        @media (max-width: 768px) {
+            .navbar-collapse {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.4s ease;
+            }
+
+            .navbar-collapse.show {
+            max-height: 500px;
+            opacity: 1;
+            }
+        }
+        </style>
+
+
+
+</head>
+
+    <style>
+        .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-blur {
+            background-color: rgba(0, 0, 0, 0.4);
+            /* nền đen mờ */
+            backdrop-filter: blur(10px);
+            /* hiệu ứng mờ nền */
+            -webkit-backdrop-filter: blur(10px);
+            /* hỗ trợ Safari */
+            border: none;
+            border-radius: 8px;
+        }
+
+        .product-section {
+            padding: 50px 20px;
+        }
+
+        .card-img-top {
+            height: 340px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+ <nav class="navbar navbar-expand-lg navbar-dark bg-transparent px-4 py-2">
+  <div class="container-fluid d-flex align-items-center justify-content-between">
+
+    <!-- Logo -->
+    <a href="indexe.html" class="navbar-brand mb-0">
+      <img src="IMG/LOGO1.png" alt="Logo" height="50">
+    </a>
+
+    <!-- Hamburger Button -->
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible Menu -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+
+        <!-- Dropdown for Products -->
+       <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle custom-nav-link" href="#" id="productDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi bi-box-seam me-1"></i> Products
+  </a>
+  <ul class="dropdown-menu dropdown-blur" aria-labelledby="productDropdown">
+    <li><a class="dropdown-item text-white" href="#bun">Rice Vermicelli</a></li>
+    <li><a class="dropdown-item text-white" href="#pho">Pho</a></li>
+    <li><a class="dropdown-item text-white" href="#banhtrang">Rice Paper</a></li>
+    <li><a class="dropdown-item text-white" href="#hutieu">Hu Tieu</a></li>
+    <li><a class="dropdown-item text-white" href="#hoanhthanh">Dried Wonton</a></li>
+    <li><a class="dropdown-item text-white" href="#my">Noodles</a></li>
+  </ul>
+</li>
+
+<!-- Contact Highlighted -->
+<li class="nav-item">
+  <a href="#lienhe" class="nav-link custom-nav-link custom-contact-link">
+  <i class="bi bi-chat-dots-fill me-1"></i> Contact
+</a>
+</li>
+
+<!-- Language Switch -->
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle custom-nav-link" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi bi-translate me-1"></i> English
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end dropdown-blur text-white" aria-labelledby="languageDropdown">
+    <li>
+      <button class="dropdown-item text-white bg-transparent border-0" onclick="window.location.href='indexe.html'">
+        English
+      </button>
+    </li>
+    <li>
+      <button class="dropdown-item text-white bg-transparent border-0" onclick="window.location.href='index.html'">
+        Tiếng Việt
+      </button>
+    </li>
+  </ul>
+</li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content shadow">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title fw-bold" id="contactModalLabel">Contact Us</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <label for="userName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="userName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="userEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userMessage" class="form-label">Message</label>
+                            <textarea class="form-control" id="userMessage" rows="4" required></textarea>
+                        </div>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-success">Send</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Banner -->
+    <header class="cool-banner">
+                <div class="overlay"></div>
+                <canvas id="goldParticles"></canvas>
+                <div class="banner-content">
+                    <h1 class="cool-title">Authentic Taste of Vietnam in Every Bite</h1>
+                </div>
+            </header>
+
+    <!-- Danh sách sản phẩm đầy đủ -->
+    <!-- DS Bún -->
+    <div id="bun" class="product-section d-none py-5">
+        <div class="container">
+            <h2 class="text-white text-center mb-4">Product: Vermicelli</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-sm-6 col-md-4 col-lg-3 item-3">
+                    <div class="card bg-dark border-0 shadow-lg" data-bs-toggle="modal" data-bs-target="#productModal"
+                        onclick="showProduct('IMG/0007.jpg', 'Baobi/BÚN BÒ HUẾ/0001.jpg','Baobi/BÚN BÒ HUẾ/0002.jpg' )">
+                        <img src="IMG/bunbohue-06.jpg" class="card-img-top" alt="Bún bò Huế">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 item-4">
+                    <div class="card bg-dark border-0 shadow-lg" data-bs-toggle="modal" data-bs-target="#productModal"
+                        onclick="showProduct('IMG/0004.jpg', 'Baobi/BÚN KHÔ/0001.jpg','Baobi/BÚN KHÔ/0002.jpg')">
+                        <img src="IMG/bunkho-01.jpg" class="card-img-top" alt="Bún khô">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 item-5">
+                    <div class="card bg-dark border-0 shadow-lg" data-bs-toggle="modal" data-bs-target="#productModal"
+                        onclick="showProduct('IMG/0005.jpg', 'Baobi/BÚN TƯƠI/0001.jpg','Baobi/BÚN TƯƠI/0002.jpg')">
+                        <img src="IMG/buntuoi-04.jpg" class="card-img-top" alt="Bún tươi">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DS Phở -->
+    <div id="pho" class="product-section d-none py-5">
+        <div class="container">
+            <h2 class="text-white text-center mb-4">Product: Pho</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-sm-6 col-md-4 col-lg-3 item-1">
+                    <div class="card bg-dark border-0 shadow-lg" data-bs-toggle="modal" data-bs-target="#productModal"
+                        onclick="showProduct('IMG/0006.jpg', 'Baobi/BÁNH PHỞ/0001.jpg','Baobi/BÁNH PHỞ/0002.jpg')">
+                        <img src="IMG/banhpho-05.jpg" class="card-img-top" alt="Phở bò">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DS Bánh Tráng -->
+    <div id="banhtrang" class="product-section d-none py-5">
+        <div class="container">
+            <h2 class="text-white text-center mb-4">Product: Rice Paper</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-sm-6 col-md-4 col-lg-3 item-2">
+                    <div class="card bg-dark border-0 shadow-lg" data-bs-toggle="modal" data-bs-target="#productModal"
+                        onclick="showProduct('IMG/0008.jpg', 'Baobi/BÁNH TRÁNG/0001.jpg','Baobi/BÁNH TRÁNG/0002.jpg')">
+                        <img src="IMG/banhtrang-07.jpg" class="card-img-top" alt="Bánh tráng cuốn">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DS Hủ Tiếu -->
+    <div id="hutieu" class="product-section d-none py-5">
+        <div class="container">
+            <h2 class="text-white text-center mb-4">Product: Hu Tieu</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-sm-6 col-md-4 col-lg-3 item-6">
+                    <div class="card bg-dark border-0 shadow-lg" data-bs-toggle="modal" data-bs-target="#productModal"
+                        onclick="showProduct('IMG/0009.jpg', 'Baobi/HỦ TIẾU/0001.jpg','Baobi/HỦ TIẾU/0002.jpg')">
+                        <img src="IMG/hutieu-08.jpg" class="card-img-top" alt="Hủ tiếu Nam Vang">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DS Hoành thánh -->
+    <div id="hoanhthanh" class="product-section d-none py-5">
+        <div class="container">
+            <h2 class="text-white text-center mb-4">Product: Wonton</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-sm-6 col-md-4 col-lg-3 item-7">
+                    <div class="card bg-dark border-0 shadow-lg" data-bs-toggle="modal" data-bs-target="#productModal"
+                        onclick="showProduct('IMG/00006.jpg', 'IMG/Hoành Thánh Lá Khô.jpg','IMG/Hoành Thánh Lá Khô 2.jpg')">
+                        <img src="IMG/Hoành Thánh Lá Khô.jpg" class="card-img-top" alt="Hoành thánh lá khô">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DS Mỳ -->
+    <div id="my" class="product-section d-none py-5">
+        <div class="container">
+            <h2 class="text-white text-center mb-4">Product: Noodles</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-sm-6 col-md-4 col-lg-3 item-10">
+                    <div class="card bg-dark border-0 shadow-lg" data-bs-toggle="modal" data-bs-target="#productModal"
+                        onclick="showProduct('IMG/00004.jpg', 'IMG/Mì Trứng.jpg','IMG/Mì Trứng 2.jpg' )">
+                        <img src="IMG/Mì Trứng.jpg" class="card-img-top" alt="Mỳ trứng">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 item-9">
+                    <div class="card bg-dark border-0 shadow-lg" data-bs-toggle="modal" data-bs-target="#productModal"
+                        onclick="showProduct('IMG/00005.jpg', 'IMG/Mì Chay.jpg','IMG/Mì Chay 2.jpg')">
+                        <img src="IMG/Mì Chay.jpg" class="card-img-top" alt="Mỳ chay">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 item-8">
+                    <div class="card bg-dark border-0 shadow-lg" data-bs-toggle="modal" data-bs-target="#productModal"
+                        onclick="showProduct('IMG/00007.jpg', 'IMG/Instant Noodle.jpg','IMG/Instant Noodle 2.jpg')">
+                        <img src="IMG/Instant Noodle.jpg" class="card-img-top" alt="Instant Noodle">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="movie-section bg-black text-white py-5">
+        <div class="container position-relative">
+            <h2 class="text-center fw-bold display-5 mb-5" style="font-family: 'Dancing Script', cursive;">
+                Our Products
+                </h2>
+
+            <!-- Left Button -->
+            <button class="slider-btn left-btn" onclick="scrollSlider(-1)">&#10094;</button>
+
+            <!-- Slider -->
+            <!-- Slider -->
+                <div class="movie-slider d-flex px-2" id="movieSlider">
+                    <div class="movie-item">
+                    <img src="IMG/banhpho-05.jpg" alt="Bánh Phở" class="movie-img">
+                </div>
+                <div class="movie-item item-2">
+                    <img src="IMG/banhtrang-07.jpg" alt="Bánh Tráng" class="movie-img">
+                </div>
+                <div class="movie-item item-3">
+                    <img src="IMG/bunbohue-06.jpg" alt="Bún Bò Huế" class="movie-img">
+                </div>
+                <div class="movie-item item-4">
+                    <img src="IMG/bunkho-01.jpg" alt="Bún Khô" class="movie-img">
+                </div>
+                <div class="movie-item item-5">
+                    <img src="IMG/buntuoi-04.jpg" alt="Bún Tươi" class="movie-img">
+                </div>
+                <div class="movie-item item-6">
+                    <img src="IMG/hutieu-08.jpg" alt="Hủ Tiếu" class="movie-img">
+                </div>
+                <div class="movie-item item-7">
+                    <img src="IMG/Hoành Thánh Lá Khô.jpg" alt="Hủ Tiếu" class="movie-img">
+                </div>
+                <div class="movie-item item-8">
+                    <img src="IMG/Instant Noodle.jpg" alt="Hủ Tiếu" class="movie-img">
+                </div>
+                <div class="movie-item item-9">
+                    <img src="IMG/Mì Chay.jpg" alt="Hủ Tiếu" class="movie-img">
+                </div>
+                <div class="movie-item item-10">
+                    <img src="IMG/Mì Trứng.jpg" alt="Hủ Tiếu" class="movie-img">
+                </div>
+            </div>
+
+            <!-- Right Button -->
+            <button class="slider-btn right-btn" onclick="scrollSlider(1)">&#10095;</button>
+        </div>
+    </section>
+
+    <section class="text-white py-5" style="background: black;">
+    <div class="container" data-aos="fade-left">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 shadow rounded p-4"
+                style="background-color: #23232376; border: 1px solid rgba(255, 255, 255, 0.3);">
+                <h4 class="text-center fw-bold mb-4" style="font-style: italic; text-decoration: underline;">
+                    Introduction</h4>
+                <p><strong>36</strong> is a rice vermicelli and noodles brand under <strong>PHUONG HONG DIEU COMPANY LIMITED</strong>.</p>
+                <p>Headquartered in Ho Chi Minh City, Vietnam, we specialize in the production and export of traditional Vietnamese foods such as rice vermicelli, pho noodles, hu tieu, and many other products.</p>
+                <p>With a strong commitment to quality, food safety, and authentic Vietnamese taste, we offer both fresh and dried products, made from carefully selected ingredients and processed with modern hygiene standards.</p>
+                <p>At 36, we aim to bring the original flavor of Vietnam to customers all around the world.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Contact Section -->
+<section id="lienhe" class="py-5" style="background-color: #000;">
+    <div class="container">
+        <h2 class="text-center text-white fw-bold mb-4">Connect with us</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="p-4 shadow rounded" style="background-color: #000; border: 1px solid rgba(255, 255, 255, 0.15);">
+                    <form id="contactForm" action="https://formspree.io/f/xeozjpep" method="POST">
+                        <div class="mb-3">
+                            <label for="userName" class="form-label text-white">Name</label>
+                            <input type="text" class="form-control rounded" id="userName" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userEmail" class="form-label text-white">Email Address</label>
+                            <input type="email" class="form-control rounded" id="userEmail" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userMessage" class="form-label text-white">Message</label>
+                            <textarea class="form-control rounded" id="userMessage" name="message" rows="4" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success px-4">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+   <footer class="bg-dark text-white pt-5 pb-4">
+    <div class="container text-center text-md-start">
+        <div class="row">
+            <!-- Customer Support -->
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
+                <h5 class="text-uppercase fw-bold mb-4">Customer Support</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="catalougee.html" class="text-white text-decoration-none">Download Catalogue</a>
+                    </li>
+                </ul>
+            </div>
+
+
+                <!-- Contact Info -->
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                    <p>
+                        <i class="bi bi-telephone-fill me-2"></i>
+                        <a href="tel:0937771956" class="text-white text-decoration-none">0937771956</a>
+                    </p>
+                    <p><i class="bi bi-envelope-fill me-2"></i> food36info@gmail.com</p>
+                    <p><i class="bi bi-geo-alt-fill me-2"></i> 34 Street No. 2, An Lac A Ward, Binh Tan District, Ho Chi
+                        Minh City</p>
+                </div>
+
+                <!-- Social Media -->
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">Connect with Us</h6>
+                    <div class="d-flex justify-content-center align-items-center gap-3">
+                        <!-- Zalo -->
+                        <a href="https://zalo.me/0937771956" target="_blank" class="me-3" title="Zalo">
+                            <img src="IMG/logozalo.png" alt="Zalo"
+                                style="height: 56px; filter: brightness(0) invert(1);">
+                        </a>
+
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/17033959118" target="_blank" class="me-3" title="WhatsApp">
+                        <img src="IMG/snapedit_1751803959094.png" alt="WhatsApp Icon" style="height: 40px;">
+                        </a>
+
+
+
+                        <!-- Email -->
+                        <a href="mailto:food36info@gmail.com" class="me-3" title="Email">
+                            <img src="IMG/logoemail.png" alt="Email" style="height: 40px;">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Store Location - Google Maps -->
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">Address</h6>
+                    <div class="ratio ratio-4x3">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.86663144155!2d106.61520607451686!3d10.744760659778143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752dd2023e7113%3A0x15a3ed36656b0463!2zMzQgxJDGsOG7nW5nIHPhu5EgMiwgQW4gTOG6oWMgQSwgQsOsbmggVMOibiwgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1751196604318!5m2!1svi!2s"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mb-3">
+
+            <div class="text-center">
+                36food@2025. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="javascript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Modal for selecting image type -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="productModalLabel">About the Product</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <button class="btn btn-outline-light m-2" onclick="showImageModal(currentProductInfo)">
+                        Product Information
+                    </button>
+                    <button class="btn btn-outline-light m-2"
+                        onclick="showImageModal([currentProductPackage1, currentProductPackage2])">
+                        Product Packaging
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal hiển thị ảnh -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl"> <!-- đổi lg thành xl -->
+            <div class="modal-content bg-dark border-0">
+                <div class="modal-body p-0 text-center" id="modalImageContainer" style="overflow: auto;">
+                    <!-- Ảnh sẽ được chèn động -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 10000, // animation duration (ms)
+            once: true // only animate once
+        });
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+         AOS.init();
+         
+    </script>
+    <script>
+    // GOLD PARTICLES EFFECT
+    const canvas = document.getElementById("goldParticles");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    for (let i = 0; i < 100; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1,
+            color: "rgba(255,215,0,0.8)",
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.5
+        });
+    }
+
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+            p.x += p.speedX;
+            p.y += p.speedY;
+            if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+        });
+        requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+    </script>
+    </body>
+
+    </html>

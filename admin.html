@@ -276,8 +276,8 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;color:var(--ink);font-weight:50
     </div>
     <h1 class="login-title">Welcome back</h1>
     <p class="login-sub">Please sign in.</p>
-    <div class="login-err" id="loginErr"><span>&#9888;</span><span>Incorrect username or password.</span></div>
-    <div class="field"><label>Username</label><input id="inUser" type="text" placeholder="Username" autocomplete="username"></div>
+    <div class="login-err" id="loginErr"><span>&#9888;</span><span>Incorrect email or password.</span></div>
+    <div class="field"><label>Email</label><input id="inUser" type="email" placeholder="you@example.com" autocomplete="email" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <div class="field"><label>Password</label><input id="inPass" type="password" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <button class="login-btn" onclick="doLogin()">Sign In</button>
     
@@ -639,34 +639,47 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;color:var(--ink);font-weight:50
 
 <div class="toast" id="toast"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-// ── AUTH ──
-var AUTH={
-  user:function(){return localStorage.getItem('36f_user')||'admin';},
-  pass:function(){return localStorage.getItem('36f_pass')||'Melmel@2024';},
-  setPass:function(p){localStorage.setItem('36f_pass',p);},
-  isIn:function(){return sessionStorage.getItem('36f_in')==='1';},
-  in:function(){sessionStorage.setItem('36f_in','1');},
-  out:function(){sessionStorage.removeItem('36f_in');}
-};
-function doLogin(){
+// ── SUPABASE ──
+var SUPABASE_URL = 'https://uejbfmybllfjjjioqkpbj.supabase.co';
+var SUPABASE_ANON_KEY = 'sb_publishable_U-G8UWuMLlLrjR7JBWMRaw_AdcpA8Zj';
+var supabaseClient = (typeof supabase !== 'undefined')
+  ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+  : null;
+
+// ── AUTH ── (real login — works from any device, backed by Supabase Auth)
+async function doLogin(){
   var u=document.getElementById('inUser').value.trim();
   var p=document.getElementById('inPass').value;
-  if(u===AUTH.user()&&p===AUTH.pass()){AUTH.in();showAdmin();}
-  else{document.getElementById('loginErr').classList.add('show');document.getElementById('inPass').value='';}
+  var btn=document.querySelector('.login-btn');
+  var errEl=document.getElementById('loginErr');
+  errEl.classList.remove('show');
+  if(!supabaseClient){errEl.querySelector('span:last-child').textContent='Backend not configured.';errEl.classList.add('show');return;}
+  if(btn){btn.disabled=true;btn.textContent='Signing in…';}
+  var res=await supabaseClient.auth.signInWithPassword({email:u,password:p});
+  if(btn){btn.disabled=false;btn.textContent='Sign In';}
+  if(res.error){
+    errEl.querySelector('span:last-child').textContent=res.error.message||'Incorrect email or password.';
+    errEl.classList.add('show');
+    document.getElementById('inPass').value='';
+    return;
+  }
+  await showAdmin();
 }
-function doLogout(){
-  AUTH.out();
+async function doLogout(){
+  if(supabaseClient) await supabaseClient.auth.signOut();
   document.getElementById('adminApp').classList.remove('active');
   document.getElementById('loginPage').style.display='flex';
   document.getElementById('inPass').value='';
   document.getElementById('loginErr').classList.remove('show');
   toast('Logged out');
 }
-function showAdmin(){
+async function showAdmin(){
   document.getElementById('loginPage').style.display='none';
   document.getElementById('adminApp').classList.add('active');
   document.getElementById('dashDate').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  await loadProducts();
   refreshAll();
   loadCompanyInfo();
   loadBanner();
@@ -676,21 +689,25 @@ function showAdmin(){
 function getData(key,def){try{var s=localStorage.getItem(key);return s?JSON.parse(s):def;}catch(e){return def;}}
 function setData(key,val){try{localStorage.setItem(key,JSON.stringify(val));}catch(e){toast('Storage error',true);}}
 
-// ── PRODUCTS ──
-var DEFAULT_PRODS=[
-  {id:1,name:'Broken Rice',nameVn:'G\u1ea1o T\u1ea5m',category:'Rice',origin:'Vietnam',desc:'Premium-grade broken rice available in 5%, 10%, 25%, and 100% broken grades. Carefully sourced and quality-checked for export.',images:['T\u1ea5m/t\u1ea5m1.jpg','T\u1ea5m/t\u1ea5m2.jpg'],img:'T\u1ea5m/t\u1ea5m1.jpg',badge:'Export Ready',featured:true},
-  {id:2,name:'Fried Shallot',nameVn:'H\u00e0nh Phi',category:'Condiments',origin:'Vietnam',desc:'Crispy golden-fried shallots in resealable pouches. Essential garnish for Vietnamese and Asian cuisines.',images:['Fried Shallot/main.jpg','Fried Shallot/Fried-shallot.jpg','Fried Shallot/Fried-shallot-2.jpg','Fried Shallot/Fried-shallot-3.jpg','Fried Shallot/Fried-shallot-4.jpg'],img:'Fried Shallot/main.jpg',badge:'New',featured:true},
-  {id:3,name:'Pho Noodles',nameVn:'B\u00e1nh Ph\u1edf Kh\u00f4',category:'Noodles',origin:'Vietnam',desc:'Flat dried rice noodles in 2mm, 5mm and 10mm widths. The authentic base for ph\u1edf broth. OEM packaging available.',images:['Pho noodles/pho1.jpg','Pho noodles/pho2.jpg'],img:'Pho noodles/pho1.jpg',badge:'',featured:false},
-  {id:4,name:'Frozen Chili',nameVn:'\u1edat \u0110\u00f4ng L\u1ea1nh',category:'Frozen',origin:'Vietnam',desc:'IQF frozen whole red chilies, cleaned and sorted. Retains fresh heat and color after thawing. Bulk and retail packs available.',images:['Frozen/frozen-chili1.jpg','Frozen/frozen-chili2.jpg','Frozen/frozen-chili3.jpg','Frozen/frozen-chili4.jpg'],img:'Frozen/frozen-chili1.jpg',badge:'Frozen',featured:true},
-  {id:5,name:'Frozen Fried Banana',nameVn:'Chu\u1ed1i Chi\u00ean \u0110\u00f4ng L\u1ea1nh',category:'Frozen',origin:'Vietnam',desc:'Ready-to-fry battered banana slices, IQF frozen for a crispy, golden snack straight from the freezer.',images:['Frozen/chuoi-chien-dong-lanh1.jpg','Frozen/Chuoi-chien-dong-lanh2.jpg'],img:'Frozen/chuoi-chien-dong-lanh1.jpg',badge:'Frozen',featured:false},
-  {id:6,name:'Frozen Sticky Corn',nameVn:'B\u1eafp N\u1ebfp N\u1ea5u',category:'Frozen',origin:'Vietnam',desc:'Cooked glutinous corn on the cob, IQF frozen and ready to reheat \u2014 a naturally sweet, chewy snack.',images:['Frozen/bap.jpg','Frozen/Bap 2.jpg','Frozen/Bap 3.jpg'],img:'Frozen/bap.jpg',badge:'Frozen',featured:false},
-  {id:7,name:'Pandan Layer Cake',nameVn:'B\u00e1nh Da L\u1ee3n',category:'Frozen',origin:'Vietnam',desc:'Traditional steamed pandan-coconut layer cake, pre-sliced and IQF frozen. Just thaw and serve.',img:'Frozen/b\u00e1nh da l\u1ee3n 1.jpg',badge:'Frozen',featured:false},
-  {id:8,name:'Banana Leaves',nameVn:'L\u00e1 Chu\u1ed1i',category:'Frozen',origin:'Vietnam',desc:'Cleaned, vacuum-packed banana leaves for traditional Vietnamese wrapping and steaming \u2014 b\u00e1nh ch\u01b0ng, b\u00e1nh t\u00e9t, and more.',img:'Frozen/l\u00e1 chu\u1ed1i 1.jpg',badge:'Frozen',featured:false},
-  {id:9,name:'Shredded Lemongrass',nameVn:'S\u1ea3 B\u00e0o',category:'Frozen',origin:'Vietnam',desc:'Finely sliced lemongrass, IQF frozen and vacuum-packed \u2014 ready to use straight from the freezer for marinades and stir-fries.',img:'Frozen/s\u1ea3 b\u00e0o 1.jpg',badge:'Frozen',featured:false},
-  {id:10,name:'Lemongrass Stalks',nameVn:'S\u1ea3 C\u00e2y',category:'Frozen',origin:'Vietnam',desc:'Whole trimmed lemongrass stalks, vacuum-packed and frozen fresh \u2014 ideal for broths, marinades, and infusions.',img:'Frozen/s\u1ea3 c\u00e2y 1.jpg',badge:'Frozen',featured:false}
-];
-function getProds(){return getData('36foods_products',DEFAULT_PRODS);}
-function saveProds(p){setData('36foods_products',p);}
+// ── PRODUCTS ── (backed by Supabase — synced across every device)
+var PRODUCTS_CACHE=[];
+function rowToProduct(row){
+  var images=(row.images&&row.images.length)?row.images:(row.img?[row.img]:[]);
+  return {id:row.id,name:row.name,nameVn:row.name_vn,category:row.category,origin:row.origin,
+    desc:row.description,images:images,img:images[0]||'',badge:row.badge,featured:row.featured,
+    moq:row.moq,sort_order:row.sort_order};
+}
+function productToRow(data){
+  return {name:data.name,name_vn:data.nameVn,category:data.category,origin:data.origin,
+    description:data.desc,images:data.images,badge:data.badge,featured:data.featured,moq:data.moq};
+}
+async function loadProducts(){
+  if(!supabaseClient) return;
+  var res=await supabaseClient.from('products').select('*').order('sort_order',{ascending:true});
+  if(res.error){toast('Failed to load products: '+res.error.message,true);return;}
+  PRODUCTS_CACHE=(res.data||[]).map(rowToProduct);
+}
+function getProds(){return PRODUCTS_CACHE;}
 
 var prodCat='all', prodSearch='';
 function setProdCat(btn){
@@ -769,10 +786,15 @@ function renderProdInto(elId,list,showFeatured){
   tbl.appendChild(tbody);el.appendChild(tbl);
 }
 
-function toggleFeatured(id){
-  var prods=getProds();
-  prods=prods.map(function(p){if(p.id===id){p.featured=!p.featured;}return p;});
-  saveProds(prods);renderProdTable();renderDashboard();toast(prods.find(function(p){return p.id===id;}).featured?'\u2605 Added to homepage':'\u2606 Removed from homepage');
+async function toggleFeatured(id){
+  var p=PRODUCTS_CACHE.find(function(x){return x.id===id;});
+  if(!p) return;
+  var newVal=!p.featured;
+  var res=await supabaseClient.from('products').update({featured:newVal}).eq('id',id);
+  if(res.error){toast('Failed to update: '+res.error.message,true);return;}
+  p.featured=newVal;
+  renderProdTable();renderDashboard();
+  toast(newVal?'\u2605 Added to homepage':'\u2606 Removed from homepage');
 }
 
 // ── PRODUCT MODAL ──
@@ -850,22 +872,25 @@ function renderGallery(){
   }
 }
 
-function onImgFiles(input){
+async function onImgFiles(input){
   var files=Array.from(input.files||[]);
   var remaining=5-prodImages.length;
-  if(remaining<=0){toast('Maximum 5 images per product',true);return;}
+  if(remaining<=0){toast('Maximum 5 images per product',true);input.value='';return;}
   files=files.slice(0,remaining);
-  var loaded=0;
-  files.forEach(function(file){
-    var r=new FileReader();
-    r.onload=function(e){
-      prodImages.push(e.target.result);
-      loaded++;
-      if(loaded===files.length) renderGallery();
-    };
-    r.readAsDataURL(file);
-  });
   input.value='';
+  if(!files.length) return;
+  toast('Uploading '+files.length+' photo'+(files.length>1?'s':'')+'…');
+  for(var i=0;i<files.length;i++){
+    var file=files[i];
+    var ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';
+    var path=Date.now()+'-'+Math.random().toString(36).slice(2)+'.'+ext;
+    var res=await supabaseClient.storage.from('product-images').upload(path,file);
+    if(res.error){toast('Upload failed: '+res.error.message,true);continue;}
+    var pub=supabaseClient.storage.from('product-images').getPublicUrl(path);
+    prodImages.push(pub.data.publicUrl);
+    renderGallery();
+  }
+  toast('✓ Photo'+(files.length>1?'s':'')+' uploaded');
 }
 
 function addImgFromUrl(){
@@ -878,36 +903,41 @@ function addImgFromUrl(){
   toast('Image added');
 }
 
-function saveProduct(){
+async function saveProduct(){
   var name=document.getElementById('p-name').value.trim();
   if(!name){toast('Product name is required',true);return;}
-  var prods=getProds();
-  var img=prodImages.length?prodImages[0]:'';
   var moqEl=document.getElementById('p-moq');
   var data={
     name:name,
     nameVn:document.getElementById('p-namevn').value.trim(),
     category:document.getElementById('p-cat').value,
-    productType:document.getElementById('p-type').value,
     origin:document.getElementById('p-origin').value.trim()||'Vietnam',
     desc:document.getElementById('p-desc').value.trim(),
     badge:document.getElementById('p-badge').value.trim(),
     moq:moqEl?moqEl.value.trim():'',
     featured:document.getElementById('p-featured').checked,
-    img:img,
     images:prodImages.slice()
   };
+  var saveBtn=document.querySelector('#prodModal .btn-primary,#prodModal .modal-save');
+  if(saveBtn) saveBtn.disabled=true;
   if(editingProdId!==null){
-    var eid=editingProdId;
-    var idx=prods.findIndex(function(p){return p.id===eid;});
-    if(idx!==-1) prods[idx]=Object.assign({},prods[idx],data);
+    var row=productToRow(data);
+    var res=await supabaseClient.from('products').update(row).eq('id',editingProdId).select().single();
+    if(saveBtn) saveBtn.disabled=false;
+    if(res.error){toast('Failed to save: '+res.error.message,true);return;}
+    var idx=PRODUCTS_CACHE.findIndex(function(p){return p.id===editingProdId;});
+    if(idx!==-1) PRODUCTS_CACHE[idx]=rowToProduct(res.data);
     toast('\u2713 Product updated');
   } else {
-    var mid=prods.reduce(function(m,p){return p.id>m?p.id:m;},0);
-    data.id=mid+1; prods.push(data);
+    var maxOrder=PRODUCTS_CACHE.reduce(function(m,p){return (p.sort_order||0)>m?(p.sort_order||0):m;},0);
+    var newRow=productToRow(data);
+    newRow.sort_order=maxOrder+1;
+    var res2=await supabaseClient.from('products').insert(newRow).select().single();
+    if(saveBtn) saveBtn.disabled=false;
+    if(res2.error){toast('Failed to add: '+res2.error.message,true);return;}
+    PRODUCTS_CACHE.push(rowToProduct(res2.data));
     toast('\u2713 Product added');
   }
-  saveProds(prods);
   closeProdModal();
   renderDashboard();
   renderProdTable();
@@ -1147,8 +1177,13 @@ function renderSubTable(){
 var confirmType=null,confirmId=null;
 function confirmDel(type,id){confirmType=type;confirmId=id;document.getElementById('confirmModal').classList.add('open');}
 function closeConfirm(){document.getElementById('confirmModal').classList.remove('open');confirmType=null;confirmId=null;}
-document.getElementById('confirmDelBtn').onclick=function(){
-  if(confirmType==='prod'){var p=getProds().filter(function(x){return x.id!==confirmId;});saveProds(p);renderProdTable();}
+document.getElementById('confirmDelBtn').onclick=async function(){
+  if(confirmType==='prod'){
+    var res=await supabaseClient.from('products').delete().eq('id',confirmId);
+    if(res.error){toast('Failed to delete: '+res.error.message,true);return;}
+    PRODUCTS_CACHE=PRODUCTS_CACHE.filter(function(x){return x.id!==confirmId;});
+    renderProdTable();
+  }
   else if(confirmType==='lead'){var l=getLeads().filter(function(x){return x.id!==confirmId;});saveLeads(l);renderLeadTable();updateNavCounts();}
   else if(confirmType==='ship'){var s=getShips().filter(function(x){return x.id!==confirmId;});saveShips(s);renderShipTable();}
   closeConfirm();renderDashboard();toast('\u2713 Deleted');
@@ -1208,13 +1243,20 @@ function switchTab(name,btn){
 }
 
 // ── ACCOUNT ──
-function changePassword(){
+async function changePassword(){
   var cur=document.getElementById('acCur').value,nw=document.getElementById('acNew').value,cf=document.getElementById('acConf').value;
   var msg=document.getElementById('acMsg');msg.style.display='block';
-  if(cur!==AUTH.pass()){msg.style.color='var(--red)';msg.textContent='\u2717 Current password incorrect.';return;}
   if(nw.length<6){msg.style.color='var(--red)';msg.textContent='\u2717 Password must be at least 6 characters.';return;}
   if(nw!==cf){msg.style.color='var(--red)';msg.textContent='\u2717 Passwords do not match.';return;}
-  AUTH.setPass(nw);msg.style.color='var(--green-ok)';msg.textContent='\u2713 Password updated!';
+  var userRes=await supabaseClient.auth.getUser();
+  var email=userRes.data&&userRes.data.user&&userRes.data.user.email;
+  if(cur&&email){
+    var reauth=await supabaseClient.auth.signInWithPassword({email:email,password:cur});
+    if(reauth.error){msg.style.color='var(--red)';msg.textContent='\u2717 Current password incorrect.';return;}
+  }
+  var res=await supabaseClient.auth.updateUser({password:nw});
+  if(res.error){msg.style.color='var(--red)';msg.textContent='\u2717 '+res.error.message;return;}
+  msg.style.color='var(--green-ok)';msg.textContent='\u2713 Password updated!';
   ['acCur','acNew','acConf'].forEach(function(id){document.getElementById(id).value='';});
   setTimeout(function(){msg.style.display='none';},3000);
 }
@@ -1244,7 +1286,18 @@ document.addEventListener('keydown', function(e){
 });
 
 // ── INIT ──
-if(AUTH.isIn()){showAdmin();}
+// Supabase persists the session itself, so a returning device stays logged in.
+(async function(){
+  if(!supabaseClient) return;
+  var sess=await supabaseClient.auth.getSession();
+  if(sess.data && sess.data.session){ showAdmin(); }
+  supabaseClient.auth.onAuthStateChange(function(event){
+    if(event==='SIGNED_OUT'){
+      document.getElementById('adminApp').classList.remove('active');
+      document.getElementById('loginPage').style.display='flex';
+    }
+  });
+})();
 
 // Expose lead save fn for homepage contact form integration
 window.saveLead=function(data){

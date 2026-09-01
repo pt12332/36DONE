@@ -1862,7 +1862,15 @@ section { padding: 100px 0; }
 <div class="toast" id="toast"></div>
 
 <!-- ─────────── SCRIPTS ─────────── -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
+
+// ── SUPABASE ──
+var SUPABASE_URL = 'https://uejbfmybllfjjjioqkpbj.supabase.co';
+var SUPABASE_ANON_KEY = 'sb_publishable_U-G8UWuMLlLrjR7JBWMRaw_AdcpA8Zj';
+var supabaseClient = (typeof supabase !== 'undefined')
+  ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+  : null;
 
 // Mobile nav toggle
 document.getElementById('navToggle').addEventListener('click', function(){
@@ -1972,14 +1980,23 @@ var DEFAULT_PRODUCTS = [
   }
 ];
 
-function getProducts() {
-  try {
-    var stored = localStorage.getItem('36foods_products');
-    if (stored) {
-      var parsed = JSON.parse(stored);
-      if (parsed && parsed.length) return parsed;
-    }
-  } catch (e) {}
+function rowToProduct(row) {
+  var images = (row.images && row.images.length) ? row.images : (row.img ? [row.img] : []);
+  return {
+    id: row.id, name: row.name, nameVn: row.name_vn, category: row.category,
+    origin: row.origin, desc: row.description, images: images,
+    img: images[0] || '', badge: row.badge, featured: row.featured, moq: row.moq
+  };
+}
+
+async function getProducts() {
+  if (supabaseClient) {
+    try {
+      var res = await supabaseClient.from('products').select('*').order('sort_order', { ascending: true });
+      if (res.error) throw res.error;
+      if (res.data && res.data.length) return res.data.map(rowToProduct);
+    } catch (e) { /* fall through to built-in defaults */ }
+  }
   return DEFAULT_PRODUCTS;
 }
 
@@ -2146,8 +2163,8 @@ function renderEmptyState(grid, msg) {
   grid.appendChild(em);
 }
 
-function renderProducts() {
-  var allProducts = getProducts();
+async function renderProducts() {
+  var allProducts = await getProducts();
 
   // Split: Frozen = category is Frozen OR productType is Frozen; Dried = everything else
   var dried  = allProducts.filter(function(p) {
@@ -2367,6 +2384,9 @@ function showToast(msg) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 3500);
 }
+
+// Retire the old per-browser product override — products now come from Supabase
+try { localStorage.removeItem('36foods_products'); } catch (e) {}
 
 // Init on DOM ready
 if (document.readyState === 'loading') {

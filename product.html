@@ -4,12 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="logo.png">
-<title>36 Food — Trusted Quality | Vietnamese Food Export Trading</title>
-<meta name="description" content="36 Food — Trusted Quality. Premium Vietnamese food export company. Broken rice, rice noodles, fried shallot, frozen spring rolls. Exporting to the USA. HACCP certified. Request a catalogue today.">
-<meta name="keywords" content="Vietnamese food export, broken rice exporter Vietnam, rice noodles wholesale, fried shallot supplier, frozen spring rolls Vietnam, Vietnamese food supplier USA">
-<meta property="og:title" content="36 Food — Trusted Quality | Vietnamese Food Export">
-<meta property="og:description" content="Premium Vietnamese dried and frozen food products exported to the United States. HACCP certified. Request a catalogue.">
-<meta property="og:type" content="website">
+<title>Product — 36 Food</title>
 <meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
@@ -1291,15 +1286,52 @@ section { padding: 100px 0; }
   .loading-grid { grid-template-columns: 1fr; grid-template-rows: none; }
   .loading-card, .loading-card-tall { grid-row: auto; min-height: 240px; }
 }
+
+/* ── PRODUCT DETAIL PAGE ── */
+.pd-breadcrumb { padding: 22px 0; font-size: 13px; color: var(--text-soft); }
+.pd-breadcrumb a { color: var(--text-mute); }
+.pd-breadcrumb a:hover { color: var(--green); }
+.pd-section { padding: 10px 0 90px; }
+.pd-loading, .pd-error { padding: 120px 24px; text-align: center; color: var(--text-soft); }
+.pd-error a { color: var(--green); font-weight: 600; }
+.pd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.pd-gallery-main {
+  position: relative; border-radius: 16px; overflow: hidden;
+  background: var(--bg-soft); aspect-ratio: 1/1; border: 1px solid var(--border-soft);
+}
+.pd-gallery-main img { width: 100%; height: 100%; object-fit: contain; }
+.pd-gallery-fallback {
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+  font-size: 72px; background: linear-gradient(135deg, var(--bg-soft), var(--bg-warm));
+}
+.pd-gallery-thumbs { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.pd-thumb {
+  width: 76px; height: 76px; border-radius: 10px; overflow: hidden;
+  border: 2px solid transparent; cursor: pointer; background: var(--bg-soft); flex-shrink: 0;
+  transition: border-color 0.15s;
+}
+.pd-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.pd-thumb.active { border-color: var(--green); }
+.pd-thumb:hover { border-color: var(--green-light); }
+.pd-cat { font-size: 12px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.pd-name { font-family: 'Playfair Display', serif; font-size: 38px; color: var(--green-dark); margin-bottom: 8px; line-height: 1.1; }
+.pd-namevn { display: none; font-size: 16px; color: var(--text-soft); font-style: italic; margin-bottom: 16px; }
+.pd-badge { display: none; background: var(--gold); color: white; font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; margin-bottom: 18px; }
+.pd-desc { font-size: 15.5px; color: var(--text-mute); line-height: 1.85; margin: 20px 0 28px; white-space: pre-line; }
+.pd-specs { border-top: 1px solid var(--border-soft); padding-top: 6px; margin-bottom: 32px; }
+.pd-spec-row { display: flex; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid var(--border-soft); font-size: 14px; }
+.pd-spec-label { color: var(--text-soft); }
+.pd-spec-value { color: var(--text); font-weight: 500; text-align: right; }
+.pd-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.pd-related { margin-top: 72px; }
+.pd-related h3 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--green-dark); margin-bottom: 28px; }
+
+@media (max-width: 860px) {
+  .pd-grid { grid-template-columns: 1fr; gap: 32px; }
+  .pd-name { font-size: 28px; }
+  .preview-grid { grid-template-columns: 1fr; }
+}
 </style>
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-H9Y90Y3C45"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-H9Y90Y3C45');
-</script>
 </head>
 <body>
 
@@ -1314,11 +1346,11 @@ section { padding: 100px 0; }
       </span>
     </a>
     <ul class="nav-menu" id="navMenu">
-      <li><a href="#products">Dried Products</a></li>
-      <li><a href="#frozen">Frozen Products</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#why-vietnam">Why Vietnam</a></li>
-      <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+      <li><a href="index.html#products">Dried Products</a></li>
+      <li><a href="index.html#frozen">Frozen Products</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#why-vietnam">Why Vietnam</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Get a Quote</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1326,469 +1358,61 @@ section { padding: 100px 0; }
   </div>
 </nav>
 
-<!-- ── HERO ── -->
-<section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-left">
-      <div class="hero-eyebrow" id="heroEyebrow">Est. 2012 · Now Exporting from Vietnam</div>
-      <h1 class="hero-title" id="heroTitle">Premium Vietnamese <em>Food Exports</em><br>to the World</h1>
-      <p class="hero-desc" id="heroDesc">Established in 2012, Phuong Hong Dieu Co., Ltd spent over a decade perfecting our products in the Vietnamese domestic market. In 2025 we began exporting — starting with the United States, with worldwide ambitions.</p>
-      <div class="hero-actions">
-        <a href="#products" class="btn btn-primary" id="heroBtn1">View Products
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
-        </a>
-        <a href="#contact" class="btn btn-secondary" id="heroBtn2">Request Catalogue</a>
-      </div>
-      <div class="hero-stats">
-        <div>
-          <div class="hero-stat-value">🇺🇸</div>
-          <div class="hero-stat-label">US Market</div>
-        </div>
-        <div>
-          <div class="hero-stat-value" id="heroStatVal1">10+</div>
-          <div class="hero-stat-label" id="heroStatLbl1">Product Lines</div>
-        </div>
-        <div>
-          <div class="hero-stat-value" id="heroStatVal2">2025</div>
-          <div class="hero-stat-label" id="heroStatLbl2">Exporting Since</div>
-        </div>
-      </div>
-    </div>
+<!-- ── BREADCRUMB ── -->
+<div class="container pd-breadcrumb">
+  <a href="index.html">Home</a> &nbsp;/&nbsp;
+  <a href="index.html#products">Products</a> &nbsp;/&nbsp;
+  <span id="pdCrumbName">Loading…</span>
+</div>
 
-    <div class="hero-visual">
-      <div class="hero-image-badge">Now Shipping to the United States</div>
-      <div class="hero-image-main">
-        <img src="Haccp.jpg"
-             alt="Vietnamese food export"
-             onerror="this.style.display='none'">
-      </div>
-      <div class="hero-image-card">
-        <div class="hero-image-card-label">HACCP Certified</div>
-        <div class="hero-image-card-title">Food Safety</div>
-        <div class="hero-image-card-sub">Full export documentation</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── FEATURES ── -->
-<section class="features">
+<!-- ── PRODUCT DETAIL ── -->
+<section class="pd-section">
   <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow">Why 36 Food</div>
-      <h2 class="section-title">A trusted <em>export partner</em></h2>
-      <p class="section-sub">Every shipment goes through certified facilities, traceable sourcing, and full documentation — built for serious importers.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg>
-        </div>
-        <h3 class="feature-title">Experienced Sourcing Team</h3>
-        <p class="feature-desc">Our experienced team carefully selects quality Vietnamese food products from trusted suppliers — ensuring consistency, freshness, and reliability in every shipment.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg>
-        </div>
-        <h3 class="feature-title">HACCP Certified</h3>
-        <p class="feature-desc">Production facilities meet international food safety standards with full lab testing and documentation.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-        </div>
-        <h3 class="feature-title">Flexible Packaging</h3>
-        <p class="feature-desc">Retail packs, foodservice bulk, and full OEM / private-label services for your own brand.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        </div>
-        <h3 class="feature-title">24-Hour Response</h3>
-        <p class="feature-desc">Proforma invoices, samples, and quotes turned around within one business day.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ── PRODUCTS PREVIEW ── -->
-<!-- ── DRIED PRODUCTS ── -->
-<section class="products-preview" id="products">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow">Dried Products</div>
-      <h2 class="section-title">Traditional <em>Dried</em> Foods</h2>
-      <p class="section-sub">Authentic Vietnamese dried food products — rice noodles, broken rice, fried shallots and more. Long shelf life, available in retail and bulk formats.</p>
-    </div>
-    <div class="preview-grid" id="driedGrid"></div>
-  </div>
-</section>
+    <div class="pd-loading" id="pdLoading">Loading product…</div>
 
-<!-- ── FROZEN PRODUCTS ── -->
-<section class="products-preview" id="frozen" style="background:var(--bg-soft)">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow">Frozen Products</div>
-      <h2 class="section-title">Ready-to-Cook <em>Frozen</em> Foods</h2>
-      <p class="section-sub">IQF frozen Vietnamese specialties — spring rolls, dumplings and more. Individually frozen for quality and convenience, ready for retail or foodservice.</p>
+    <div class="pd-error" id="pdError" style="display:none">
+      <p style="font-size:16px;margin-bottom:12px">We couldn't load this product right now.</p>
+      <a href="index.html">&larr; Back to all products</a>
     </div>
-    <div class="preview-grid" id="frozenGrid"></div>
-    <div class="products-cta">
-      <a href="#contact" class="btn btn-primary">Request Full Catalogue
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
 
-<!-- ── ABOUT ── -->
-<section class="about" id="about">
-  <div class="container about-grid">
-    <div>
-      <div class="section-eyebrow">About 36 Food</div>
-      <h2 class="section-title">From Vietnam to the world — <em>our story</em></h2>
-      <p class="about-text">Founded in 2012, Phuong Hong Dieu Company Limited started as a domestic food manufacturer serving the Vietnamese market. For over a decade we built expertise in dried and frozen food production — sourcing quality ingredients, refining our processes, and earning food safety certifications. In 2025 we made our first international move, exporting to the United States. This is just the beginning — our goal is to bring authentic Vietnamese food products to markets worldwide.</p>
-      <ul class="about-list">
-        <li>
-          <div class="about-check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
-          Established 2012 — over 13 years of food production experience
-        </li>
-        <li>
-          <div class="about-check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
-          Quality-sourced ingredients, carefully selected by our experienced team
-        </li>
-        <li>
-          <div class="about-check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
-          HACCP, ISO 22000 and VSATTP certified production facilities
-        </li>
-        <li>
-          <div class="about-check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
-          First export to the United States in 2025 — expanding worldwide
-        </li>
-      </ul>
-    </div>
-    <div class="about-stats">
-      <div class="about-stat">
-        <div class="about-stat-value" id="aboutStatVal1">13+</div>
-        <div class="about-stat-label">Years in Business</div>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-value">2025</div>
-        <div class="about-stat-label">Export Started</div>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-value">Dried &amp;<br>Frozen</div>
-        <div class="about-stat-label">Product Types</div>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-value">24h</div>
-        <div class="about-stat-label">Quote Response</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ── WHY VIETNAM ── -->
-<section class="why-vn" id="why-vietnam">
-  <div class="container why-vn-grid">
-    <div class="why-vn-left">
-      <div class="section-eyebrow" style="color:var(--gold-light)">Why Source from Vietnam</div>
-      <h2 class="section-title">Vietnam — a <em>world-class</em><br>food producer</h2>
-      <p>Vietnam is one of the world's top rice exporters and a leading producer of processed food products. Competitive production costs, a skilled workforce, and strict food safety standards make Vietnam the smart choice for importers worldwide.</p>
-      <div class="why-vn-stats">
-        <div class="why-vn-stat">
-          <div class="why-vn-stat-val">2nd</div>
-          <div class="why-vn-stat-lbl">Largest rice exporter globally</div>
-        </div>
-        <div class="why-vn-stat">
-          <div class="why-vn-stat-val">FDA</div>
-          <div class="why-vn-stat-lbl">US FDA compliant facilities</div>
-        </div>
-        <div class="why-vn-stat">
-          <div class="why-vn-stat-val">US-VN</div>
-          <div class="why-vn-stat-lbl">Bilateral trade agreement</div>
-        </div>
-        <div class="why-vn-stat">
-          <div class="why-vn-stat-val">HACCP</div>
-          <div class="why-vn-stat-lbl">International food safety certified</div>
-        </div>
-      </div>
-    </div>
-    <div class="why-vn-right">
-      <div class="why-vn-point">
-        <div class="why-vn-icon">🌾</div>
+    <div id="pdContent" style="display:none">
+      <div class="pd-grid">
         <div>
-          <h4>Rich Agricultural Heritage</h4>
-          <p>Vietnam's fertile climate produces some of Asia's finest rice, vegetables, and herbs. Generations of food expertise are built into every product we export.</p>
+          <div class="pd-gallery-main" id="pdMainImgWrap"></div>
+          <div class="pd-gallery-thumbs" id="pdThumbs"></div>
         </div>
-      </div>
-      <div class="why-vn-point">
-        <div class="why-vn-icon">💰</div>
         <div>
-          <h4>Trusted Trade Partner</h4>
-          <p>Vietnam has established strong trade relationships with the US, EU, and Asia-Pacific markets. Preferential trade agreements and streamlined customs processes make importing from Vietnam smooth and reliable.</p>
-        </div>
-      </div>
-      <div class="why-vn-point">
-        <div class="why-vn-icon">🏭</div>
-        <div>
-          <h4>Modern Production Facilities</h4>
-          <p>HACCP and ISO 22000 certified factories with international-grade equipment, hygiene protocols, and full traceability from production to port.</p>
-        </div>
-      </div>
-      <div class="why-vn-point">
-        <div class="why-vn-icon">🚢</div>
-        <div>
-          <h4>Strategic Export Location</h4>
-          <p>Ho Chi Minh City's Cát Lái Port is one of Southeast Asia's busiest. Fast transit times to the US West Coast (14–18 days) and East Coast (25–30 days).</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── CERTIFICATIONS ── -->
-<section class="certs-section" id="certifications">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow">Trust & Compliance</div>
-      <h2 class="section-title">Certified for <em>international</em> trade</h2>
-      <p class="section-sub">Every shipment is backed by internationally recognised food safety certifications and full export documentation — so your import process is smooth and compliant.</p>
-    </div>
-    <div class="certs-grid">
-      <div class="cert-card">
-        <div class="cert-badge-icon green">✅</div>
-        <div class="cert-name">HACCP</div>
-        <p class="cert-desc">Hazard Analysis Critical Control Point — the global standard for food safety management in production facilities.</p>
-        <span class="cert-tag">Food Safety</span>
-      </div>
-      <div class="cert-card">
-        <div class="cert-badge-icon blue">🔵</div>
-        <div class="cert-name">ISO 22000</div>
-        <p class="cert-desc">International food safety management system standard. Covers the full supply chain from raw material to final product.</p>
-        <span class="cert-tag">Quality Management</span>
-      </div>
-      <div class="cert-card">
-        <div class="cert-badge-icon gold">⭐</div>
-        <div class="cert-name">VSATTP</div>
-        <p class="cert-desc">Vietnamese Ministry of Health food safety certification — required for all food manufacturers operating in Vietnam.</p>
-        <span class="cert-tag">Vietnam Certified</span>
-      </div>
-      <div class="cert-card">
-        <div class="cert-badge-icon green">🇺🇸</div>
-        <div class="cert-name">FDA Compliant</div>
-        <p class="cert-desc">All export products meet US FDA requirements. Full documentation including phytosanitary certificates provided with every shipment.</p>
-        <span class="cert-tag">US Market</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── MARKET ── -->
-<section class="markets" id="markets">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow">Our Market</div>
-      <h2 class="section-title">Now exporting to the <em>United States</em></h2>
-      <p class="section-sub">After 13 years serving the Vietnamese domestic market, we made our first international move in 2025 — exporting to the United States. This is our first step in a worldwide expansion, and we are actively seeking importers and distributors globally.</p>
-    </div>
-    <div class="us-market-block">
-      <div class="us-market-hero">
-        <div class="us-flag-big">🇺🇸</div>
-        <div class="us-market-info">
-          <h3>United States of America</h3>
-          <p>Our first international export market. We supply dried and frozen Vietnamese food products — including broken rice, fried shallots, and rice noodles — to US-based importers and distributors. After 13 years in domestic production, we entered the US market in 2025.</p>
-          <div class="us-tags">
-            <span class="us-tag">✓ First container shipped</span>
-            <span class="us-tag">✓ FDA compliant</span>
-            <span class="us-tag">✓ HACCP certified</span>
-            <span class="us-tag">✓ Full documentation</span>
+          <div class="pd-cat" id="pdCat"></div>
+          <h1 class="pd-name" id="pdName"></h1>
+          <div class="pd-namevn" id="pdNameVn"></div>
+          <div class="pd-badge" id="pdBadge"></div>
+          <p class="pd-desc" id="pdDesc"></p>
+          <div class="pd-specs">
+            <div class="pd-spec-row">
+              <span class="pd-spec-label">Origin</span>
+              <span class="pd-spec-value" id="pdOrigin">Vietnam</span>
+            </div>
+            <div class="pd-spec-row" id="pdMoqRow" style="display:none">
+              <span class="pd-spec-label">Min. Order Qty</span>
+              <span class="pd-spec-value" id="pdMoq"></span>
+            </div>
+          </div>
+          <div class="pd-cta-row">
+            <a href="#" id="pdInquireBtn" class="btn btn-primary">Inquire About This Product
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+            </a>
+            <a href="index.html#products" class="btn btn-secondary">&larr; All Products</a>
           </div>
         </div>
       </div>
-      <div class="us-expanding">
-        <div class="us-expand-icon">🌏</div>
-        <div>
-          <strong>Our worldwide ambition</strong>
-          <span>The US is our first market — we are actively seeking importers and distributors across Europe, Asia, Australia and beyond. Get in touch to discuss opportunities in your country.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ── CONTAINER LOADING ── -->
-<section class="loading-section" id="loading">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow">From Our Factory</div>
-      <h2 class="section-title">Loading &amp; <em>Shipping</em></h2>
-      <p class="section-sub">Every shipment is carefully packed, palletised, and loaded into containers at our facility in Ho Chi Minh City — ready for export to the US and beyond.</p>
-    </div>
-    <div class="loading-grid">
-      <div class="loading-card loading-card-tall">
-        <img src="Palletising.jpg"
-             alt="Container loading at warehouse"
-             onerror="this.style.display='none';this.parentElement.classList.add('loading-card-fallback')">
-        <div class="loading-label">Palletising &amp; wrapping products for container loading</div>
-      </div>
-      <div class="loading-card">
-        <img src="Quality-checked.jpg"
-             alt="Warehouse packaging"
-             onerror="this.style.display='none';this.parentElement.classList.add('loading-card-fallback')">
-        <div class="loading-label">Quality-checked products stacked and ready</div>
-      </div>
-      <div class="loading-card">
-        <img src="Loading-40ft.jpg"
-             alt="Loading container"
-             onerror="this.style.display='none';this.parentElement.classList.add('loading-card-fallback')">
-        <div class="loading-label">Loading into 20ft / 40ft containers</div>
-      </div>
-      <div class="loading-card">
-        <img src="cat-lai.jpg"
-             alt="Cát Lái Port shipping"
-             onerror="this.style.display='none';this.parentElement.classList.add('loading-card-fallback')">
-        <div class="loading-label">Shipped from Cát Lái Port, Ho Chi Minh City</div>
+      <div class="pd-related" id="pdRelatedSection" style="display:none">
+        <h3>You May Also Like</h3>
+        <div class="preview-grid" id="pdRelatedGrid"></div>
       </div>
     </div>
 
-    <div class="loading-steps">
-      <div class="lstep">
-        <div class="lstep-num">01</div>
-        <div class="lstep-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="16" rx="2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 13l2 2 4-4"/></svg></div>
-        <div class="lstep-title">Order Confirmed</div>
-        <div class="lstep-desc">Proforma invoice issued, packaging specs finalised, production scheduled.</div>
-      </div>
-      <div class="lstep-arrow">→</div>
-      <div class="lstep">
-        <div class="lstep-num">02</div>
-        <div class="lstep-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l5 3V10l5 3V10l5 3v8H3z"/><path d="M7 6V3M12 6V3"/><path d="M3 21h18"/></svg></div>
-        <div class="lstep-title">Production &amp; QC</div>
-        <div class="lstep-desc">Products manufactured, quality-checked and packed under HACCP protocols.</div>
-      </div>
-      <div class="lstep-arrow">→</div>
-      <div class="lstep">
-        <div class="lstep-num">03</div>
-        <div class="lstep-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
-        <div class="lstep-title">Container Loading</div>
-        <div class="lstep-desc">Palletised and loaded at our warehouse into FCL or LCL containers.</div>
-      </div>
-      <div class="lstep-arrow">→</div>
-      <div class="lstep">
-        <div class="lstep-num">04</div>
-        <div class="lstep-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l1.5 4h15L21 17"/><path d="M6 17V9h3V6h3v3h3v8"/><path d="M2 21c1.3 1 2.7 1 4 0s2.7-1 4 0 2.7 1 4 0 2.7-1 4 0"/></svg></div>
-        <div class="lstep-title">Port &amp; Shipped</div>
-        <div class="lstep-desc">Containers sealed and shipped from Cát Lái Port with full B/L and customs docs.</div>
-      </div>
-    </div>
-
-
-  </div>
-</section>
-
-<!-- ── CONTACT ── -->
-<section class="contact" id="contact">
-  <div class="container contact-grid">
-    <div class="contact-info">
-      <div class="section-eyebrow">Get in Touch</div>
-      <h2 class="section-title">Ready to <em>import?</em></h2>
-      <p class="section-sub">Send us your requirements — we respond within one business day. We work with importers, distributors, and wholesalers in the US and are open to new market opportunities worldwide.</p>
-      <div class="contact-list">
-        <div class="contact-item">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-          </div>
-          <div>
-            <div class="contact-label">Phone / Zalo / WhatsApp</div>
-            <div class="contact-value" id="ciPhone">+84 937 771 956</div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div>
-            <div class="contact-label">Email</div>
-            <div class="contact-value" id="ciEmail">food36info@gmail.com</div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div>
-            <div class="contact-label">Office &amp; Factory</div>
-            <div class="contact-value" id="ciAddress">34 Đường Số 2, An Lạc A<br>Bình Tân, TP. Hồ Chí Minh</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <form class="contact-form" onsubmit="event.preventDefault(); submitInquiry();">
-      <div class="form-title">Send an Inquiry</div>
-      <div class="form-sub">Tell us your requirements and we'll get back to you within 24 hours.</div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="cf-name">Full Name *</label>
-          <input id="cf-name" type="text" placeholder="Your name" required>
-        </div>
-        <div class="form-group">
-          <label for="cf-company">Company</label>
-          <input id="cf-company" type="text" placeholder="Your company">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="cf-email">Email *</label>
-          <input id="cf-email" type="email" placeholder="your@email.com" required>
-        </div>
-        <div class="form-group">
-          <label for="cf-country">Country</label>
-          <input id="cf-country" type="text" placeholder="Your country">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="cf-product">Products of Interest</label>
-        <select id="cf-product">
-          <option value="">Select a category</option>
-          <option>Broken Rice / Gạo Tấm</option>
-          <option>Fried Shallot / Hành Phi</option>
-          <option>Pho Noodles / Bánh Phở</option>
-          <option>Frozen Chili / Ớt Đông Lạnh</option>
-          <option>Frozen Fried Banana / Chuối Chiên</option>
-          <option>Frozen Sticky Corn / Bắp Nếp</option>
-          <option>Pandan Layer Cake / Bánh Da Lợn</option>
-          <option>Banana Leaves / Lá Chuối</option>
-          <option>Shredded Lemongrass / Sả Bào</option>
-          <option>Lemongrass Stalks / Sả Cây</option>
-          <option>Rice Paper / Bánh Tráng</option>
-          <option>Hu Tieu / Hủ Tiếu</option>
-          <option>Mixed Container / Multiple Products</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="cf-msg">Message</label>
-        <textarea id="cf-msg" placeholder="Target volume, destination, packaging needs, or any questions..."></textarea>
-      </div>
-      <button type="submit" class="form-submit">Send Inquiry</button>
-    </form>
-  </div>
-</section>
-
-
-<!-- ── NEWSLETTER ── -->
-<section class="newsletter" id="newsletter">
-  <div class="container newsletter-inner">
-    <div class="newsletter-text">
-      <h3>Stay updated on new products</h3>
-      <p>Get notified when we add new products, certifications, or export capabilities.</p>
-    </div>
-    <form class="newsletter-form" onsubmit="event.preventDefault(); subscribeNewsletter(this)">
-      <input type="email" id="nl-email" placeholder="your@email.com" required>
-      <button type="submit" class="newsletter-btn">Subscribe</button>
-    </form>
   </div>
 </section>
 
@@ -1835,24 +1459,24 @@ section { padding: 100px 0; }
       <div class="footer-col">
         <h4>Products</h4>
         <ul>
-          <li><a href="#products" class="footer-cat-label">🌾 Dried Products</a></li>
-          <li><a href="#frozen" class="footer-cat-label">🧊 Frozen Products</a></li>
+          <li><a href="index.html#products" class="footer-cat-label">🌾 Dried Products</a></li>
+          <li><a href="index.html#frozen" class="footer-cat-label">🧊 Frozen Products</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#markets">US Market</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="index.html#about">About Us</a></li>
+          <li><a href="index.html#markets">US Market</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Trade</h4>
         <ul>
-          <li><a href="#contact">Request Catalogue</a></li>
-          <li><a href="#contact">Get a Sample</a></li>
-          <li><a href="#contact">OEM / Private Label</a></li>
+          <li><a href="index.html#contact">Request Catalogue</a></li>
+          <li><a href="index.html#contact">Get a Sample</a></li>
+          <li><a href="index.html#contact">OEM / Private Label</a></li>
         </ul>
       </div>
     </div>
@@ -1868,568 +1492,6 @@ section { padding: 100px 0; }
 </footer>
 
 <div class="toast" id="toast"></div>
-
-<!-- ─────────── SCRIPTS ─────────── -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script>
-
-// ── SUPABASE ──
-var SUPABASE_URL = 'https://uejbfmybllfjjioqkpbj.supabase.co';
-var SUPABASE_ANON_KEY = 'sb_publishable_U-G8UWuMLlLrjR7JBWMRaw_AdcpA8Zj';
-var supabaseClient = (typeof supabase !== 'undefined')
-  ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-  : null;
-
-// Mobile nav toggle
-document.getElementById('navToggle').addEventListener('click', function(){
-  document.getElementById('navMenu').classList.toggle('open');
-});
-
-// Contact float (WhatsApp / Zalo / WeChat / Email)
-function toggleContactFloat(){
-  document.getElementById('contactFloat').classList.toggle('open');
-}
-function closeContactFloat(){
-  document.getElementById('contactFloat').classList.remove('open');
-}
-document.addEventListener('click', function(e){
-  var cf = document.getElementById('contactFloat');
-  if (cf && cf.classList.contains('open') && !cf.contains(e.target)) closeContactFloat();
-});
-
-// WeChat QR modal
-function openWechat(){
-  closeContactFloat();
-  document.getElementById('wechatModal').classList.add('open');
-}
-function closeWechat(){
-  document.getElementById('wechatModal').classList.remove('open');
-}
-document.querySelectorAll('.nav-menu a').forEach(function(a){
-  a.addEventListener('click', function(){
-    document.getElementById('navMenu').classList.remove('open');
-  });
-});
-
-// Hidden admin access — Ctrl+Alt+A
-document.addEventListener('keydown', function(e){
-  if (e.ctrlKey && e.altKey && (e.key === 'a' || e.key === 'A')) {
-    window.location.href = 'admin.html';
-  }
-});
-
-// Default products (used if admin hasn't added any)
-var DEFAULT_PRODUCTS = [
-  {
-    id: 1, name: 'Broken Rice', nameVn: 'Gạo Tấm', category: 'Rice',
-    origin: 'Vietnam',
-    desc: 'Premium-grade broken rice available in 5%, 10%, 25%, and 100% broken grades. Carefully sourced and quality-checked for export.',
-    images: ['Tấm/tấm1.jpg', 'Tấm/tấm2.jpg'],
-    img: 'Tấm/tấm1.jpg', badge: 'Export Ready'
-  },
-  {
-    id: 2, name: 'Fried Shallot', nameVn: 'Hành Phi', category: 'Condiments',
-    origin: 'Vietnam',
-    desc: 'Crispy, golden-fried shallots in resealable pouches. An essential garnish for Vietnamese, Thai, and Indonesian cuisines.',
-    images: ['Fried Shallot/main.jpg', 'Fried Shallot/Fried-shallot.jpg', 'Fried Shallot/Fried-shallot-2.jpg', 'Fried Shallot/Fried-shallot-3.jpg', 'Fried Shallot/Fried-shallot-4.jpg'],
-    img: 'Fried Shallot/main.jpg', badge: 'New'
-  },
-  {
-    id: 3, name: 'Pho Noodles', nameVn: 'Bánh Phở Khô', category: 'Noodles',
-    origin: 'Vietnam',
-    desc: 'Flat dried rice noodles in 2mm, 5mm and 10mm widths — the authentic base for phở broth. OEM packaging available.',
-    images: ['Pho noodles/pho1.jpg', 'Pho noodles/pho2.jpg'],
-    img: 'Pho noodles/pho1.jpg', badge: ''
-  },
-  {
-    id: 4, name: 'Frozen Chili', nameVn: 'Ớt Đông Lạnh', category: 'Frozen',
-    origin: 'Vietnam',
-    desc: 'IQF frozen whole red chilies, cleaned and sorted. Retains fresh heat and color after thawing. Bulk and retail packs available.',
-    images: ['Frozen/frozen-chili1.jpg', 'Frozen/frozen-chili2.jpg', 'Frozen/frozen-chili3.jpg', 'Frozen/frozen-chili4.jpg'],
-    img: 'Frozen/frozen-chili1.jpg', badge: 'Frozen'
-  },
-  {
-    id: 5, name: 'Frozen Fried Banana', nameVn: 'Chuối Chiên Đông Lạnh', category: 'Frozen',
-    origin: 'Vietnam',
-    desc: 'Ready-to-fry battered banana slices, IQF frozen for a crispy, golden snack straight from the freezer.',
-    images: ['Frozen/chuoi-chien-dong-lanh1.jpg', 'Frozen/Chuoi-chien-dong-lanh2.jpg'],
-    img: 'Frozen/chuoi-chien-dong-lanh1.jpg', badge: 'Frozen'
-  },
-  {
-    id: 6, name: 'Frozen Sticky Corn', nameVn: 'Bắp Nếp Nấu', category: 'Frozen',
-    origin: 'Vietnam',
-    desc: 'Cooked glutinous corn on the cob, IQF frozen and ready to reheat — a naturally sweet, chewy snack.',
-    images: ['Frozen/bap.jpg', 'Frozen/Bap 2.jpg', 'Frozen/Bap 3.jpg'],
-    img: 'Frozen/bap.jpg', badge: 'Frozen'
-  },
-  {
-    id: 7, name: 'Pandan Layer Cake', nameVn: 'Bánh Da Lợn', category: 'Frozen',
-    origin: 'Vietnam',
-    desc: 'Traditional steamed pandan-coconut layer cake, pre-sliced and IQF frozen. Just thaw and serve.',
-    img: 'Frozen/bánh da lợn 1.jpg', badge: 'Frozen'
-  },
-  {
-    id: 8, name: 'Banana Leaves', nameVn: 'Lá Chuối', category: 'Frozen',
-    origin: 'Vietnam',
-    desc: 'Cleaned, vacuum-packed banana leaves for traditional Vietnamese wrapping and steaming — bánh chưng, bánh tét, and more.',
-    img: 'Frozen/lá chuối 1.jpg', badge: 'Frozen'
-  },
-  {
-    id: 9, name: 'Shredded Lemongrass', nameVn: 'Sả Bào', category: 'Frozen',
-    origin: 'Vietnam',
-    desc: 'Finely sliced lemongrass, IQF frozen and vacuum-packed — ready to use straight from the freezer for marinades and stir-fries.',
-    img: 'Frozen/sả bào 1.jpg', badge: 'Frozen'
-  },
-  {
-    id: 10, name: 'Lemongrass Stalks', nameVn: 'Sả Cây', category: 'Frozen',
-    origin: 'Vietnam',
-    desc: 'Whole trimmed lemongrass stalks, vacuum-packed and frozen fresh — ideal for broths, marinades, and infusions.',
-    img: 'Frozen/sả cây 1.jpg', badge: 'Frozen'
-  }
-];
-
-function rowToProduct(row) {
-  var images = (row.images && row.images.length) ? row.images : (row.img ? [row.img] : []);
-  return {
-    id: row.id, name: row.name, nameVn: row.name_vn, category: row.category,
-    origin: row.origin, desc: row.description, images: images,
-    img: images[0] || '', badge: row.badge, featured: row.featured, moq: row.moq
-  };
-}
-
-async function getProducts() {
-  if (supabaseClient) {
-    try {
-      var res = await supabaseClient.from('products').select('*').order('sort_order', { ascending: true });
-      if (res.error) throw res.error;
-      if (res.data && res.data.length) return res.data.map(rowToProduct);
-    } catch (e) { /* fall through to built-in defaults */ }
-  }
-  return DEFAULT_PRODUCTS;
-}
-
-function buildCard(p) {
-  var card = document.createElement('div');
-  card.className = 'preview-card';
-  if (p.id != null) {
-    card.style.cursor = 'pointer';
-    card.addEventListener('click', function(){
-      window.location.href = 'product.html?id=' + p.id;
-    });
-  }
-
-  var imgWrap = document.createElement('div');
-  imgWrap.className = 'preview-image';
-
-  // Build image list — use p.images if available, else fall back to p.img
-  var imgs = (p.images && p.images.length) ? p.images : (p.img ? [p.img] : []);
-  var fallbackEmoji = p.category === 'Frozen' ? '🧊' : '🍚';
-
-  if (imgs.length > 1) {
-    // Multi-image carousel
-    var carousel = document.createElement('div');
-    carousel.className = 'preview-carousel';
-
-    var slides = document.createElement('div');
-    slides.className = 'carousel-slides';
-    var currentSlide = 0;
-
-    imgs.forEach(function(src, i) {
-      var slide = document.createElement('div');
-      slide.className = 'carousel-slide';
-      var im = document.createElement('img');
-      im.alt = (p.name || '') + ' ' + (i+1);
-      im.onerror = function() {
-        slide.innerHTML = '';
-        var fb = document.createElement('div');
-        fb.className = 'preview-image-fallback';
-        fb.textContent = fallbackEmoji;
-        slide.appendChild(fb);
-      };
-      im.src = src;
-      slide.appendChild(im);
-      slides.appendChild(slide);
-    });
-    carousel.appendChild(slides);
-
-    // Prev / Next
-    var prev = document.createElement('button');
-    prev.className = 'carousel-prev';
-    prev.innerHTML = '&#8249;';
-    prev.title = 'Previous';
-    var next = document.createElement('button');
-    next.className = 'carousel-next';
-    next.innerHTML = '&#8250;';
-    next.title = 'Next';
-
-    // Dots
-    var dots = document.createElement('div');
-    dots.className = 'carousel-dots';
-    var dotEls = [];
-    imgs.forEach(function(_, i) {
-      var dot = document.createElement('button');
-      dot.className = 'carousel-dot' + (i===0?' active':'');
-      dot.onclick = (function(idx){ return function(e){ e.stopPropagation(); goSlide(idx); }; })(i);
-      dots.appendChild(dot);
-      dotEls.push(dot);
-    });
-
-    function goSlide(idx) {
-      currentSlide = (idx + imgs.length) % imgs.length;
-      slides.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
-      dotEls.forEach(function(d,i){ d.className = 'carousel-dot'+(i===currentSlide?' active':''); });
-    }
-
-    prev.onclick = function(e){ e.stopPropagation(); goSlide(currentSlide - 1); };
-    next.onclick = function(e){ e.stopPropagation(); goSlide(currentSlide + 1); };
-
-    carousel.appendChild(prev);
-    carousel.appendChild(next);
-    carousel.appendChild(dots);
-    imgWrap.appendChild(carousel);
-
-  } else if (imgs.length === 1) {
-    // Single image
-    var img = document.createElement('img');
-    img.alt = p.name || '';
-    img.onerror = function() {
-      imgWrap.innerHTML = '';
-      var fb = document.createElement('div');
-      fb.className = 'preview-image-fallback';
-      fb.textContent = fallbackEmoji;
-      imgWrap.appendChild(fb);
-      if (p.badge) addBadge(imgWrap, p.badge);
-    };
-    img.src = imgs[0];
-    imgWrap.appendChild(img);
-  } else {
-    // No image fallback
-    var fb = document.createElement('div');
-    fb.className = 'preview-image-fallback';
-    fb.textContent = fallbackEmoji;
-    imgWrap.appendChild(fb);
-  }
-
-  if (p.badge) addBadge(imgWrap, p.badge);
-  card.appendChild(imgWrap);
-
-  var body = document.createElement('div');
-  body.className = 'preview-body';
-
-  var cat = document.createElement('div');
-  cat.className = 'preview-cat';
-  cat.textContent = p.category || '';
-  body.appendChild(cat);
-
-  var name = document.createElement('div');
-  name.className = 'preview-name';
-  name.textContent = p.name || '';
-  body.appendChild(name);
-
-  if (p.nameVn) {
-    var vn = document.createElement('div');
-    vn.className = 'preview-vn';
-    vn.textContent = p.nameVn;
-    body.appendChild(vn);
-  }
-
-  var desc = document.createElement('div');
-  desc.className = 'preview-desc';
-  desc.textContent = p.desc || '';
-  desc.title = 'Click to read more';
-  desc.addEventListener('click', function(e){
-    e.stopPropagation();
-    desc.classList.toggle('expanded');
-  });
-  body.appendChild(desc);
-
-  // MOQ tag
-  if (p.moq) {
-    var moqTag = document.createElement('div');
-    moqTag.className = 'preview-moq';
-    moqTag.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg> MOQ: ' + p.moq;
-    body.appendChild(moqTag);
-  }
-
-  var foot = document.createElement('div');
-  foot.className = 'preview-foot';
-
-  var origin = document.createElement('div');
-  origin.className = 'preview-origin';
-  origin.textContent = '📍 ' + (p.origin || 'Vietnam');
-  foot.appendChild(origin);
-
-  var link = document.createElement('a');
-  link.className = 'preview-link';
-  link.href = '#contact';
-  link.innerHTML = 'Inquire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>';
-  link.addEventListener('click', function(e){
-    e.stopPropagation();
-    preselectContactProduct(p.name);
-  });
-  foot.appendChild(link);
-
-  body.appendChild(foot);
-  card.appendChild(body);
-  return card;
-}
-
-function renderEmptyState(grid, msg) {
-  var em = document.createElement('div');
-  em.style.cssText = 'grid-column:1/-1;text-align:center;padding:48px 24px;color:var(--text-soft)';
-  em.innerHTML = '<div style="font-size:40px;margin-bottom:12px;opacity:.5">' + (msg.icon || '📦') + '</div><p style="font-size:14px">' + msg.text + '</p>';
-  grid.appendChild(em);
-}
-
-async function renderProducts() {
-  var allProducts = await getProducts();
-
-  // Split: Frozen = category is Frozen OR productType is Frozen; Dried = everything else
-  var dried  = allProducts.filter(function(p) {
-    return p.category !== 'Frozen' && p.productType !== 'Frozen';
-  });
-  var frozen = allProducts.filter(function(p) {
-    return p.category === 'Frozen' || p.productType === 'Frozen';
-  });
-
-  var driedGrid  = document.getElementById('driedGrid');
-  var frozenGrid = document.getElementById('frozenGrid');
-
-  if (driedGrid) {
-    driedGrid.innerHTML = '';
-    if (dried.length) {
-      dried.forEach(function(p) { driedGrid.appendChild(buildCard(p)); });
-    } else {
-      renderEmptyState(driedGrid, { icon: '🌾', text: 'Dried products coming soon. Check back shortly.' });
-    }
-  }
-
-  if (frozenGrid) {
-    frozenGrid.innerHTML = '';
-    if (frozen.length) {
-      frozen.forEach(function(p) { frozenGrid.appendChild(buildCard(p)); });
-    } else {
-      renderEmptyState(frozenGrid, { icon: '🧊', text: 'Frozen products coming soon. Check back shortly.' });
-    }
-  }
-}
-
-function addBadge(parent, text) {
-  var b = document.createElement('div');
-  b.className = 'preview-badge';
-  b.textContent = text;
-  parent.appendChild(b);
-}
-
-// ── LOAD FROM ADMIN ──
-// Reads company info + banner saved in admin panel and applies to page
-function loadFromAdmin() {
-  // Defaults
-  var DEFAULT_INFO = {
-    phone: '+84 937 771 956',
-    email: 'food36info@gmail.com',
-    address: '34 Đường Số 2, An Lạc A\nBình Tân, TP. Hồ Chí Minh',
-    zalo: 'https://zalo.me/0937771956',
-    wa: 'https://wa.me/84937771956',
-    tagline: '"Giữ trọn vị Việt — Gửi xa thế giới"'
-  };
-  var DEFAULT_BANNER = {
-    eyebrow: 'Vietnam Export · Est. 2014',
-    title: 'Premium Vietnamese|Food Exports|to the World',
-    desc: 'Phuong Hong Dieu Co., Ltd exports premium Vietnamese food products to the United States — from broken rice and fried shallots to rice noodles and beyond. Quality sourced, certified, and shipped.',
-    btn1: 'View Products',
-    btn2: 'Request Catalogue'
-  };
-
-  // Read saved data
-  var info = DEFAULT_INFO;
-  var banner = DEFAULT_BANNER;
-  try {
-    var si = localStorage.getItem('36f_companyinfo');
-    if (si) info = JSON.parse(si);
-  } catch(e) {}
-  try {
-    var sb = localStorage.getItem('36f_banner');
-    if (sb) banner = JSON.parse(sb);
-  } catch(e) {}
-
-  // Apply Banner
-  var eyebrowEl = document.getElementById('heroEyebrow');
-  if (eyebrowEl && banner.eyebrow) eyebrowEl.textContent = banner.eyebrow;
-
-  var titleEl = document.getElementById('heroTitle');
-  if (titleEl && banner.title) {
-    // Support | as line break, and last word in italic gold
-    var parts = banner.title.split('|');
-    var html = parts.map(function(p, i) {
-      return i === parts.length - 1 ? '<em>' + p + '</em>' : p + '<br>';
-    }).join('');
-    titleEl.innerHTML = html;
-  }
-
-  var descEl = document.getElementById('heroDesc');
-  if (descEl && banner.desc) descEl.textContent = banner.desc;
-
-  var btn1 = document.getElementById('heroBtn1');
-  if (btn1 && banner.btn1) {
-    btn1.childNodes[0].textContent = banner.btn1 + ' ';
-  }
-
-  var btn2 = document.getElementById('heroBtn2');
-  if (btn2 && banner.btn2) btn2.textContent = banner.btn2;
-
-  var s1 = document.getElementById('heroStatVal1');
-  if (s1 && banner.stat1val) s1.textContent = banner.stat1val;
-  var sl1 = document.getElementById('heroStatLbl1');
-  if (sl1 && banner.stat1lbl) sl1.textContent = banner.stat1lbl;
-
-  var s2 = document.getElementById('heroStatVal2');
-  if (s2 && banner.stat2val) s2.textContent = banner.stat2val;
-  var sl2 = document.getElementById('heroStatLbl2');
-  if (sl2 && banner.stat2lbl) sl2.textContent = banner.stat2lbl;
-
-  // Apply Company Info
-  var phoneEl = document.getElementById('ciPhone');
-  if (phoneEl && info.phone) phoneEl.textContent = info.phone;
-
-  var emailEl = document.getElementById('ciEmail');
-  if (emailEl && info.email) emailEl.textContent = info.email;
-
-  var addrEl = document.getElementById('ciAddress');
-  if (addrEl && info.address) addrEl.innerHTML = info.address.replace(/\n/g, '<br>');
-
-  var tagEl = document.getElementById('footerTagline');
-  if (tagEl && info.tagline) tagEl.innerHTML = info.tagline + '<br>Preserving Vietnamese flavour, delivered globally.';
-
-  var zaloEl = document.getElementById('footerZalo');
-  if (zaloEl && info.zalo) zaloEl.href = info.zalo;
-
-  var waEl = document.getElementById('footerWa');
-  if (waEl && info.wa) waEl.href = info.wa;
-
-  var footEmailEl = document.getElementById('footerEmail');
-  if (footEmailEl && info.email) footEmailEl.href = 'mailto:' + info.email;
-}
-
-// Contact form — submits to Formspree + saves lead to admin
-function submitInquiry() {
-  var name    = document.getElementById('cf-name').value.trim();
-  var email   = document.getElementById('cf-email').value.trim();
-  var company = document.getElementById('cf-company').value.trim();
-  var country = document.getElementById('cf-country').value.trim();
-  var product = document.getElementById('cf-product').value;
-  var msg     = document.getElementById('cf-msg').value.trim();
-
-  if (!name || !email) {
-    showToast('Please fill in your name and email.');
-    return;
-  }
-
-  var btn = document.querySelector('.form-submit');
-  var origText = btn.textContent;
-  btn.textContent = 'Sending…';
-  btn.disabled = true;
-
-  // Formspree requires _replyto for reply-to header
-  fetch('https://formspree.io/f/xeozjpep', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      _replyto: email,
-      _subject: '36 Food — New Inquiry from ' + name,
-      name:    name,
-      email:   email,
-      company: company || '(not provided)',
-      country: country || '(not provided)',
-      product: product || '(not provided)',
-      message: msg     || '(no message)'
-    })
-  })
-  .then(function(res) {
-    btn.textContent = origText;
-    btn.disabled = false;
-    return res.json().then(function(data) {
-      return { ok: res.ok, data: data, status: res.status };
-    });
-  })
-  .then(function(result) {
-    if (result.ok) {
-      // Save to admin lead tracker
-      try {
-        var leads = JSON.parse(localStorage.getItem('36foods_leads') || '[]');
-        var maxId = leads.reduce(function(m, l) { return l.id > m ? l.id : m; }, 0);
-        leads.push({
-          id: maxId + 1,
-          name: name, company: company, email: email,
-          country: country, product: product, message: msg,
-          date: new Date().toLocaleDateString('en-US'),
-          status: 'new'
-        });
-        localStorage.setItem('36foods_leads', JSON.stringify(leads));
-      } catch(e) {}
-      showToast('✓ Inquiry sent! We\'ll respond within 24 hours.');
-      ['cf-name','cf-company','cf-email','cf-country','cf-product','cf-msg'].forEach(function(id){
-        var el = document.getElementById(id); if (el) el.value = '';
-      });
-    } else {
-      // Show specific Formspree error if available
-      var errMsg = result.data && result.data.error ? result.data.error : 'Status ' + result.status;
-      console.error('Formspree error:', errMsg, result.data);
-      if (result.status === 403) {
-        showToast('Form not activated yet — please verify your Formspree email first.');
-      } else {
-        showToast('Something went wrong. Please email food36info@gmail.com directly.');
-      }
-    }
-  })
-  .catch(function(err) {
-    btn.textContent = origText;
-    btn.disabled = false;
-    console.error('Fetch error:', err);
-    showToast('Connection error. Please email food36info@gmail.com directly.');
-  });
-}
-
-// Toast
-var toastTimer;
-function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 3500);
-}
-
-// Retire the old per-browser product override — products now come from Supabase
-try { localStorage.removeItem('36foods_products'); } catch (e) {}
-
-// Preselect a product in the inquiry form's dropdown (used by product cards'
-// Inquire link, and by product.html's "Inquire About This Product" button)
-function preselectContactProduct(name) {
-  var sel = document.getElementById('cf-product');
-  if (!sel || !name) return;
-  var match = Array.prototype.find.call(sel.options, function(o){ return o.text.indexOf(name) === 0; });
-  if (match) sel.value = match.value;
-}
-
-// Init on DOM ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function() {
-    loadFromAdmin();
-    renderProducts();
-    var urlProduct = new URLSearchParams(window.location.search).get('product');
-    if (urlProduct) preselectContactProduct(urlProduct);
-  });
-} else {
-  loadFromAdmin();
-  renderProducts();
-  var urlProduct = new URLSearchParams(window.location.search).get('product');
-  if (urlProduct) preselectContactProduct(urlProduct);
-}
-</script>
 
 <!-- ── CONTACT FLOAT (WhatsApp / Zalo / WeChat / Email) ── -->
 <div class="contact-float" id="contactFloat">
@@ -2478,6 +1540,7 @@ if (document.readyState === 'loading') {
   </button>
 </div>
 
+
 <!-- ── WECHAT QR MODAL ── -->
 <div class="wechat-overlay" id="wechatModal" onclick="if(event.target===this)closeWechat()">
   <div class="wechat-box">
@@ -2494,6 +1557,202 @@ if (document.readyState === 'loading') {
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+// ── SUPABASE ──
+var SUPABASE_URL = 'https://uejbfmybllfjjioqkpbj.supabase.co';
+var SUPABASE_ANON_KEY = 'sb_publishable_U-G8UWuMLlLrjR7JBWMRaw_AdcpA8Zj';
+var supabaseClient = (typeof supabase !== 'undefined')
+  ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+  : null;
 
+function rowToProduct(row) {
+  var images = (row.images && row.images.length) ? row.images : (row.img ? [row.img] : []);
+  return {
+    id: row.id, name: row.name, nameVn: row.name_vn, category: row.category,
+    origin: row.origin, desc: row.description, images: images,
+    img: images[0] || '', badge: row.badge, featured: row.featured, moq: row.moq
+  };
+}
+
+function getIdFromUrl() {
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get('id');
+  return id ? parseInt(id, 10) : null;
+}
+
+var currentImages = [];
+
+function setMainImage(i) {
+  var mainImg = document.getElementById('pdMainImg');
+  if (mainImg) mainImg.src = currentImages[i];
+  document.querySelectorAll('.pd-thumb').forEach(function(t, idx){ t.classList.toggle('active', idx === i); });
+}
+
+function showError(){
+  document.getElementById('pdLoading').style.display = 'none';
+  document.getElementById('pdError').style.display = 'block';
+}
+
+function renderProduct(p) {
+  document.title = p.name + ' — 36 Food';
+  document.getElementById('pdLoading').style.display = 'none';
+  document.getElementById('pdContent').style.display = 'block';
+
+  document.getElementById('pdCrumbName').textContent = p.name;
+  document.getElementById('pdCat').textContent = p.category || '';
+  document.getElementById('pdName').textContent = p.name || '';
+
+  if (p.nameVn) {
+    var vnEl = document.getElementById('pdNameVn');
+    vnEl.textContent = p.nameVn;
+    vnEl.style.display = 'block';
+  }
+  if (p.badge) {
+    var badgeEl = document.getElementById('pdBadge');
+    badgeEl.textContent = p.badge;
+    badgeEl.style.display = 'inline-block';
+  }
+  document.getElementById('pdDesc').textContent = p.desc || '';
+  document.getElementById('pdOrigin').textContent = p.origin || 'Vietnam';
+
+  if (p.moq) {
+    document.getElementById('pdMoqRow').style.display = 'flex';
+    document.getElementById('pdMoq').textContent = p.moq;
+  }
+
+  currentImages = (p.images && p.images.length) ? p.images : (p.img ? [p.img] : []);
+  var fallbackEmoji = p.category === 'Frozen' ? '🧊' : '🍚';
+  var mainWrap = document.getElementById('pdMainImgWrap');
+
+  if (currentImages.length) {
+    var mainImg = document.createElement('img');
+    mainImg.id = 'pdMainImg';
+    mainImg.alt = p.name || '';
+    mainImg.onerror = function(){ mainWrap.innerHTML = '<div class="pd-gallery-fallback">' + fallbackEmoji + '</div>'; };
+    mainImg.src = currentImages[0];
+    mainWrap.innerHTML = '';
+    mainWrap.appendChild(mainImg);
+  } else {
+    mainWrap.innerHTML = '<div class="pd-gallery-fallback">' + fallbackEmoji + '</div>';
+  }
+
+  var thumbsWrap = document.getElementById('pdThumbs');
+  thumbsWrap.innerHTML = '';
+  if (currentImages.length > 1) {
+    currentImages.forEach(function(src, i){
+      var t = document.createElement('div');
+      t.className = 'pd-thumb' + (i === 0 ? ' active' : '');
+      var im = document.createElement('img');
+      im.src = src; im.alt = '';
+      t.appendChild(im);
+      t.addEventListener('click', function(){ setMainImage(i); });
+      thumbsWrap.appendChild(t);
+    });
+  }
+
+  var inquireBtn = document.getElementById('pdInquireBtn');
+  inquireBtn.href = 'index.html?product=' + encodeURIComponent(p.name) + '#contact';
+}
+
+function buildRelatedCard(p) {
+  var a = document.createElement('a');
+  a.href = 'product.html?id=' + p.id;
+  a.className = 'preview-card';
+  a.style.display = 'block';
+
+  var imgWrap = document.createElement('div');
+  imgWrap.className = 'preview-image';
+  var fallbackEmoji = p.category === 'Frozen' ? '🧊' : '🍚';
+  if (p.img) {
+    var img = document.createElement('img');
+    img.alt = p.name || '';
+    img.onerror = function(){
+      imgWrap.innerHTML = '';
+      var fb = document.createElement('div');
+      fb.className = 'preview-image-fallback';
+      fb.textContent = fallbackEmoji;
+      imgWrap.appendChild(fb);
+    };
+    img.src = p.img;
+    imgWrap.appendChild(img);
+  } else {
+    var fb = document.createElement('div');
+    fb.className = 'preview-image-fallback';
+    fb.textContent = fallbackEmoji;
+    imgWrap.appendChild(fb);
+  }
+  if (p.badge) {
+    var b = document.createElement('div');
+    b.className = 'preview-badge';
+    b.textContent = p.badge;
+    imgWrap.appendChild(b);
+  }
+  a.appendChild(imgWrap);
+
+  var body = document.createElement('div');
+  body.className = 'preview-body';
+  var cat = document.createElement('div');
+  cat.className = 'preview-cat'; cat.textContent = p.category || '';
+  body.appendChild(cat);
+  var name = document.createElement('div');
+  name.className = 'preview-name'; name.textContent = p.name || '';
+  body.appendChild(name);
+  if (p.nameVn) {
+    var vn = document.createElement('div');
+    vn.className = 'preview-vn'; vn.textContent = p.nameVn;
+    body.appendChild(vn);
+  }
+  a.appendChild(body);
+  return a;
+}
+
+async function loadRelated(category, excludeId) {
+  if (!supabaseClient) return;
+  try {
+    var res = await supabaseClient.from('products').select('*').eq('category', category).neq('id', excludeId).limit(4);
+    if (res.error || !res.data || !res.data.length) return;
+    var grid = document.getElementById('pdRelatedGrid');
+    res.data.map(rowToProduct).forEach(function(p){ grid.appendChild(buildRelatedCard(p)); });
+    document.getElementById('pdRelatedSection').style.display = 'block';
+  } catch (e) { /* related products are a nice-to-have, fail silently */ }
+}
+
+async function loadProduct() {
+  var id = getIdFromUrl();
+  if (!id || !supabaseClient) { showError(); return; }
+  try {
+    var res = await supabaseClient.from('products').select('*').eq('id', id).single();
+    if (res.error || !res.data) { showError(); return; }
+    var p = rowToProduct(res.data);
+    renderProduct(p);
+    loadRelated(p.category, p.id);
+  } catch (e) { showError(); }
+}
+
+// ── Contact float (WhatsApp / Zalo / WeChat / Email) ──
+function toggleContactFloat(){ document.getElementById('contactFloat').classList.toggle('open'); }
+function closeContactFloat(){ document.getElementById('contactFloat').classList.remove('open'); }
+document.addEventListener('click', function(e){
+  var cf = document.getElementById('contactFloat');
+  if (cf && cf.classList.contains('open') && !cf.contains(e.target)) closeContactFloat();
+});
+
+// ── WeChat QR modal ──
+function openWechat(){
+  closeContactFloat();
+  document.getElementById('wechatModal').classList.add('open');
+}
+function closeWechat(){
+  document.getElementById('wechatModal').classList.remove('open');
+}
+
+// ── Mobile nav toggle ──
+document.getElementById('navToggle').addEventListener('click', function(){
+  document.getElementById('navMenu').classList.toggle('open');
+});
+
+loadProduct();
+</script>
 </body>
 </html>

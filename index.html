@@ -1314,8 +1314,8 @@ section { padding: 100px 0; }
       </span>
     </a>
     <ul class="nav-menu" id="navMenu">
-      <li><a href="#products">Dried Products</a></li>
-      <li><a href="#frozen">Frozen Products</a></li>
+      <li><a href="products.html?cat=dried">Dried Products</a></li>
+      <li><a href="products.html?cat=frozen">Frozen Products</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#why-vietnam">Why Vietnam</a></li>
       <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
@@ -1334,7 +1334,7 @@ section { padding: 100px 0; }
       <h1 class="hero-title" id="heroTitle">Premium Vietnamese <em>Food Exports</em><br>to the World</h1>
       <p class="hero-desc" id="heroDesc">Established in 2012, Phuong Hong Dieu Co., Ltd spent over a decade perfecting our products in the Vietnamese domestic market. In 2025 we began exporting — starting with the United States, with worldwide ambitions.</p>
       <div class="hero-actions">
-        <a href="#products" class="btn btn-primary" id="heroBtn1">View Products
+        <a href="products.html" class="btn btn-primary" id="heroBtn1">View Products
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
         </a>
         <a href="#contact" class="btn btn-secondary" id="heroBtn2">Request Catalogue</a>
@@ -1422,6 +1422,11 @@ section { padding: 100px 0; }
       <p class="section-sub">Authentic Vietnamese dried food products — rice noodles, broken rice, fried shallots and more. Long shelf life, available in retail and bulk formats.</p>
     </div>
     <div class="preview-grid" id="driedGrid"></div>
+    <div style="text-align:center;margin-top:36px">
+      <a href="products.html?cat=dried" class="btn btn-secondary">View All Dried Products
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1434,6 +1439,11 @@ section { padding: 100px 0; }
       <p class="section-sub">IQF frozen Vietnamese specialties — spring rolls, dumplings and more. Individually frozen for quality and convenience, ready for retail or foodservice.</p>
     </div>
     <div class="preview-grid" id="frozenGrid"></div>
+    <div style="text-align:center;margin-top:36px">
+      <a href="products.html?cat=frozen" class="btn btn-secondary">View All Frozen Products
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+      </a>
+    </div>
     <div class="products-cta">
       <a href="#contact" class="btn btn-primary">Request Full Catalogue
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
@@ -1835,8 +1845,8 @@ section { padding: 100px 0; }
       <div class="footer-col">
         <h4>Products</h4>
         <ul>
-          <li><a href="#products" class="footer-cat-label">🌾 Dried Products</a></li>
-          <li><a href="#frozen" class="footer-cat-label">🧊 Frozen Products</a></li>
+          <li><a href="products.html?cat=dried" class="footer-cat-label">🌾 Dried Products</a></li>
+          <li><a href="products.html?cat=frozen" class="footer-cat-label">🧊 Frozen Products</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -2401,6 +2411,33 @@ function showToast(msg) {
   t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 3500);
+}
+
+// Newsletter signup
+async function subscribeNewsletter(form) {
+  var emailInput = document.getElementById('nl-email');
+  var email = emailInput.value.trim();
+  if (!email) return;
+  var btn = form.querySelector('.newsletter-btn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Subscribing…'; }
+  try {
+    if (!supabaseClient) throw new Error('offline');
+    var res = await supabaseClient.from('subscribers').insert({ email: email });
+    if (res.error) {
+      if (res.error.code === '23505') {
+        showToast("You're already subscribed!");
+      } else {
+        throw res.error;
+      }
+    } else {
+      showToast('✓ Subscribed! Thanks for joining.');
+      form.reset();
+    }
+  } catch (e) {
+    showToast('Something went wrong — please email food36info@gmail.com directly.');
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Subscribe'; }
+  }
 }
 
 // Retire the old per-browser product override — products now come from Supabase

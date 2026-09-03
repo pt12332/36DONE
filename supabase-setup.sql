@@ -57,3 +57,17 @@ insert into products (name, name_vn, category, origin, description, images, badg
 ('Banana Leaves','Lá Chuối','Frozen','Vietnam','Cleaned, vacuum-packed banana leaves for traditional Vietnamese wrapping and steaming — bánh chưng, bánh tét, and more.',ARRAY['Frozen/lá chuối 1.jpg'],'Frozen',false,8),
 ('Shredded Lemongrass','Sả Bào','Frozen','Vietnam','Finely sliced lemongrass, IQF frozen and vacuum-packed — ready to use straight from the freezer for marinades and stir-fries.',ARRAY['Frozen/sả bào 1.jpg'],'Frozen',false,9),
 ('Lemongrass Stalks','Sả Cây','Frozen','Vietnam','Whole trimmed lemongrass stalks, vacuum-packed and frozen fresh — ideal for broths, marinades, and infusions.',ARRAY['Frozen/sả cây 1.jpg'],'Frozen',false,10);
+
+-- 4. Newsletter subscribers (anyone can sign up; only you can view/remove them)
+create table if not exists subscribers (
+  id bigint generated always as identity primary key,
+  email text not null unique,
+  created_at timestamptz not null default now()
+);
+alter table subscribers enable row level security;
+create policy "Anyone can subscribe" on subscribers
+  for insert to anon, authenticated with check (true);
+create policy "Authenticated can view subscribers" on subscribers
+  for select to authenticated using (true);
+create policy "Authenticated can delete subscribers" on subscribers
+  for delete to authenticated using (true);

@@ -679,7 +679,7 @@ async function showAdmin(){
   document.getElementById('loginPage').style.display='none';
   document.getElementById('adminApp').classList.add('active');
   document.getElementById('dashDate').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  await loadProducts();
+  await Promise.all([loadProducts(), loadSubscribers()]);
   refreshAll();
   loadCompanyInfo();
   loadBanner();
@@ -1116,9 +1116,8 @@ function exportCSV(type){
     leads.forEach(function(l){rows.push([l.id,l.name,l.company,l.email,l.country,l.product,l.date,l.status,l.message]);});
     filename='36foods_inquiries.csv';
   }else if(type==='subscribers'){
-    var subs=JSON.parse(localStorage.getItem('36f_subscribers')||'[]');
     rows=[['Email','Subscribed']];
-    subs.forEach(function(e){rows.push([e,'Yes']);});
+    SUBSCRIBERS_CACHE.forEach(function(s){rows.push([s.email,s.created_at||'Yes']);});
     filename='36foods_subscribers.csv';
   }else if(type==='shipments'){
     var ships=getShips();
@@ -1139,9 +1138,16 @@ function exportCSV(type){
   URL.revokeObjectURL(url);toast('\u2713 '+filename+' downloaded');
 }
 
-// ── SUBSCRIBERS ──
+// ── SUBSCRIBERS ── (backed by Supabase — real signups from the live site)
+var SUBSCRIBERS_CACHE=[];
+async function loadSubscribers(){
+  if(!supabaseClient) return;
+  var res=await supabaseClient.from('subscribers').select('*').order('created_at',{ascending:false});
+  if(res.error){toast('Failed to load subscribers: '+res.error.message,true);return;}
+  SUBSCRIBERS_CACHE=res.data||[];
+}
 function renderSubTable(){
-  var subs=JSON.parse(localStorage.getItem('36f_subscribers')||'[]');
+  var subs=SUBSCRIBERS_CACHE;
   var el=document.getElementById('subTable');if(!el)return;
   el.innerHTML='';
   var nb=document.getElementById('navSubCount');
@@ -1156,17 +1162,18 @@ function renderSubTable(){
   ['#','Email Address','Action'].forEach(function(h){var th=document.createElement('th');th.textContent=h;thr.appendChild(th);});
   thead.appendChild(thr);tbl.appendChild(thead);
   var tbody=document.createElement('tbody');
-  subs.forEach(function(email,i){
+  subs.forEach(function(s,i){
     var tr=document.createElement('tr');
     function td(v){var t=document.createElement('td');t.textContent=v;tr.appendChild(t);}
-    td(i+1);td(email);
+    td(i+1);td(s.email);
     var tdA=document.createElement('td');
     var db=document.createElement('button');db.className='tbl-btn tbl-del';db.textContent='Remove';
-    db.onclick=(function(idx){return function(){
-      var s=JSON.parse(localStorage.getItem('36f_subscribers')||'[]');
-      s.splice(idx,1);localStorage.setItem('36f_subscribers',JSON.stringify(s));
+    db.onclick=async function(){
+      var res=await supabaseClient.from('subscribers').delete().eq('id',s.id);
+      if(res.error){toast('Failed to remove: '+res.error.message,true);return;}
+      SUBSCRIBERS_CACHE=SUBSCRIBERS_CACHE.filter(function(x){return x.id!==s.id;});
       renderSubTable();toast('Subscriber removed');
-    };})(i);
+    };
     tdA.appendChild(db);tr.appendChild(tdA);
     tbody.appendChild(tr);
   });

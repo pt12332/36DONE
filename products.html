@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="logo.png">
-<title>Product — 36 Food</title>
+<title>All Products — 36 Food</title>
+<meta name="description" content="Browse the full range of Vietnamese dried and frozen food products exported by 36 Food — broken rice, fried shallot, pho noodles, frozen produce and more.">
 <meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
@@ -1287,50 +1288,22 @@ section { padding: 100px 0; }
   .loading-card, .loading-card-tall { grid-row: auto; min-height: 240px; }
 }
 
-/* ── PRODUCT DETAIL PAGE ── */
-.pd-breadcrumb { padding: 22px 0; font-size: 13px; color: var(--text-soft); }
-.pd-breadcrumb a { color: var(--text-mute); }
-.pd-breadcrumb a:hover { color: var(--green); }
-.pd-section { padding: 10px 0 90px; }
-.pd-loading, .pd-error { padding: 120px 24px; text-align: center; color: var(--text-soft); }
-.pd-error a { color: var(--green); font-weight: 600; }
-.pd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-.pd-gallery-main {
-  position: relative; border-radius: 16px; overflow: hidden;
-  background: var(--bg-soft); aspect-ratio: 1/1; border: 1px solid var(--border-soft);
+/* ── PRODUCT CATALOG PAGE ── */
+.pc-hero { padding: 52px 0 8px; text-align: center; }
+.pc-hero .section-eyebrow { justify-content: center; }
+.pc-hero .section-title { margin-bottom: 4px; }
+.pc-filters { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 32px 0 12px; }
+.pc-filter-pill {
+  padding: 10px 24px; border-radius: 30px; border: 1px solid var(--border);
+  background: white; color: var(--text-mute); font-size: 13.5px; font-weight: 600;
+  cursor: pointer; transition: all 0.18s; font-family: inherit;
 }
-.pd-gallery-main img { width: 100%; height: 100%; object-fit: contain; }
-.pd-gallery-fallback {
-  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-  font-size: 72px; background: linear-gradient(135deg, var(--bg-soft), var(--bg-warm));
-}
-.pd-gallery-thumbs { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
-.pd-thumb {
-  width: 76px; height: 76px; border-radius: 10px; overflow: hidden;
-  border: 2px solid transparent; cursor: pointer; background: var(--bg-soft); flex-shrink: 0;
-  transition: border-color 0.15s;
-}
-.pd-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.pd-thumb.active { border-color: var(--green); }
-.pd-thumb:hover { border-color: var(--green-light); }
-.pd-cat { font-size: 12px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-.pd-name { font-family: 'Playfair Display', serif; font-size: 38px; color: var(--green-dark); margin-bottom: 8px; line-height: 1.1; }
-.pd-namevn { display: none; font-size: 16px; color: var(--text-soft); font-style: italic; margin-bottom: 16px; }
-.pd-badge { display: none; background: var(--gold); color: white; font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; margin-bottom: 18px; }
-.pd-desc { font-size: 15.5px; color: var(--text-mute); line-height: 1.85; margin: 20px 0 28px; white-space: pre-line; }
-.pd-specs { border-top: 1px solid var(--border-soft); padding-top: 6px; margin-bottom: 32px; }
-.pd-spec-row { display: flex; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid var(--border-soft); font-size: 14px; }
-.pd-spec-label { color: var(--text-soft); }
-.pd-spec-value { color: var(--text); font-weight: 500; text-align: right; }
-.pd-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
-.pd-related { margin-top: 72px; }
-.pd-related h3 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--green-dark); margin-bottom: 28px; }
-
-@media (max-width: 860px) {
-  .pd-grid { grid-template-columns: 1fr; gap: 32px; }
-  .pd-name { font-size: 28px; }
-  .preview-grid { grid-template-columns: 1fr; }
-}
+.pc-filter-pill:hover { border-color: var(--green-light); color: var(--green); }
+.pc-filter-pill.active { background: var(--green); border-color: var(--green); color: white; }
+.pc-count { text-align: center; font-size: 13px; color: var(--text-soft); margin-bottom: 32px; }
+.pc-section { padding: 10px 0 100px; }
+.pc-loading, .pc-error, .pc-empty { padding: 100px 24px; text-align: center; color: var(--text-soft); }
+.pc-error a { color: var(--green); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -1358,59 +1331,35 @@ section { padding: 100px 0; }
   </div>
 </nav>
 
-<!-- ── BREADCRUMB ── -->
-<div class="container pd-breadcrumb">
-  <a href="index.html">Home</a> &nbsp;/&nbsp;
-  <a href="products.html">Products</a> &nbsp;/&nbsp;
-  <span id="pdCrumbName">Loading…</span>
-</div>
+<!-- ── PAGE HEADER ── -->
+<section class="pc-hero">
+  <div class="container">
+    <div class="section-eyebrow">Our Catalog</div>
+    <h1 class="section-title">Full Product <em>Range</em></h1>
+    <p class="section-sub" style="max-width:640px;margin:0 auto">Browse our complete range of dried and frozen Vietnamese food exports. Click any product for full details, photos, and specs.</p>
+  </div>
+</section>
 
-<!-- ── PRODUCT DETAIL ── -->
-<section class="pd-section">
+<!-- ── FILTERS + GRID ── -->
+<section class="pc-section">
   <div class="container">
 
-    <div class="pd-loading" id="pdLoading">Loading product…</div>
+    <div class="pc-loading" id="pcLoading">Loading products…</div>
 
-    <div class="pd-error" id="pdError" style="display:none">
-      <p style="font-size:16px;margin-bottom:12px">We couldn't load this product right now.</p>
-      <a href="index.html">&larr; Back to all products</a>
+    <div class="pc-error" id="pcError" style="display:none">
+      <p style="font-size:16px;margin-bottom:12px">We couldn't load the catalog right now.</p>
+      <a href="index.html">&larr; Back to homepage</a>
     </div>
 
-    <div id="pdContent" style="display:none">
-      <div class="pd-grid">
-        <div>
-          <div class="pd-gallery-main" id="pdMainImgWrap"></div>
-          <div class="pd-gallery-thumbs" id="pdThumbs"></div>
-        </div>
-        <div>
-          <div class="pd-cat" id="pdCat"></div>
-          <h1 class="pd-name" id="pdName"></h1>
-          <div class="pd-namevn" id="pdNameVn"></div>
-          <div class="pd-badge" id="pdBadge"></div>
-          <p class="pd-desc" id="pdDesc"></p>
-          <div class="pd-specs">
-            <div class="pd-spec-row">
-              <span class="pd-spec-label">Origin</span>
-              <span class="pd-spec-value" id="pdOrigin">Vietnam</span>
-            </div>
-            <div class="pd-spec-row" id="pdMoqRow" style="display:none">
-              <span class="pd-spec-label">Min. Order Qty</span>
-              <span class="pd-spec-value" id="pdMoq"></span>
-            </div>
-          </div>
-          <div class="pd-cta-row">
-            <a href="#" id="pdInquireBtn" class="btn btn-primary">Inquire About This Product
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
-            </a>
-            <a href="products.html" class="btn btn-secondary">&larr; All Products</a>
-          </div>
-        </div>
+    <div id="pcContent" style="display:none">
+      <div class="pc-filters">
+        <button class="pc-filter-pill" data-cat="all" onclick="setFilter('all')">All Products</button>
+        <button class="pc-filter-pill" data-cat="dried" onclick="setFilter('dried')">🌾 Dried</button>
+        <button class="pc-filter-pill" data-cat="frozen" onclick="setFilter('frozen')">🧊 Frozen</button>
       </div>
-
-      <div class="pd-related" id="pdRelatedSection" style="display:none">
-        <h3>You May Also Like</h3>
-        <div class="preview-grid" id="pdRelatedGrid"></div>
-      </div>
+      <div class="pc-count" id="pcCount"></div>
+      <div class="preview-grid" id="pcGrid"></div>
+      <div class="pc-empty" id="pcEmpty" style="display:none">No products in this category yet.</div>
     </div>
 
   </div>
@@ -1575,160 +1524,227 @@ function rowToProduct(row) {
   };
 }
 
-function getIdFromUrl() {
-  var params = new URLSearchParams(window.location.search);
-  var id = params.get('id');
-  return id ? parseInt(id, 10) : null;
+var ALL_PRODUCTS = [];
+var currentFilter = 'all';
+
+function matchesFilter(p, filter) {
+  if (filter === 'frozen') return p.category === 'Frozen';
+  if (filter === 'dried') return p.category !== 'Frozen';
+  return true;
 }
 
-var currentImages = [];
-
-function setMainImage(i) {
-  var mainImg = document.getElementById('pdMainImg');
-  if (mainImg) mainImg.src = currentImages[i];
-  document.querySelectorAll('.pd-thumb').forEach(function(t, idx){ t.classList.toggle('active', idx === i); });
+function renderCatalog() {
+  var grid = document.getElementById('pcGrid');
+  grid.innerHTML = '';
+  var list = ALL_PRODUCTS.filter(function(p){ return matchesFilter(p, currentFilter); });
+  document.getElementById('pcCount').textContent = list.length + ' product' + (list.length === 1 ? '' : 's');
+  document.getElementById('pcEmpty').style.display = list.length ? 'none' : 'block';
+  list.forEach(function(p){ grid.appendChild(buildCard(p)); });
 }
 
-function showError(){
-  document.getElementById('pdLoading').style.display = 'none';
-  document.getElementById('pdError').style.display = 'block';
+function setFilter(filter) {
+  currentFilter = filter;
+  document.querySelectorAll('.pc-filter-pill').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-cat') === filter);
+  });
+  var url = new URL(window.location.href);
+  if (filter === 'all') url.searchParams.delete('cat'); else url.searchParams.set('cat', filter);
+  window.history.replaceState({}, '', url);
+  renderCatalog();
 }
 
-function renderProduct(p) {
-  document.title = p.name + ' — 36 Food';
-  document.getElementById('pdLoading').style.display = 'none';
-  document.getElementById('pdContent').style.display = 'block';
+function showCatalogError(){
+  document.getElementById('pcLoading').style.display = 'none';
+  document.getElementById('pcError').style.display = 'block';
+}
 
-  document.getElementById('pdCrumbName').textContent = p.name;
-  document.getElementById('pdCat').textContent = p.category || '';
-  document.getElementById('pdName').textContent = p.name || '';
-
-  if (p.nameVn) {
-    var vnEl = document.getElementById('pdNameVn');
-    vnEl.textContent = p.nameVn;
-    vnEl.style.display = 'block';
+async function loadCatalog() {
+  if (!supabaseClient) { showCatalogError(); return; }
+  try {
+    var res = await supabaseClient.from('products').select('*').order('sort_order', { ascending: true });
+    if (res.error) throw res.error;
+    ALL_PRODUCTS = (res.data || []).map(rowToProduct);
+    document.getElementById('pcLoading').style.display = 'none';
+    document.getElementById('pcContent').style.display = 'block';
+    var params = new URLSearchParams(window.location.search);
+    var initial = params.get('cat') || 'all';
+    if (['all', 'dried', 'frozen'].indexOf(initial) === -1) initial = 'all';
+    setFilter(initial);
+  } catch (e) {
+    showCatalogError();
   }
-  if (p.badge) {
-    var badgeEl = document.getElementById('pdBadge');
-    badgeEl.textContent = p.badge;
-    badgeEl.style.display = 'inline-block';
-  }
-  document.getElementById('pdDesc').textContent = p.desc || '';
-  document.getElementById('pdOrigin').textContent = p.origin || 'Vietnam';
+}
 
-  if (p.moq) {
-    document.getElementById('pdMoqRow').style.display = 'flex';
-    document.getElementById('pdMoq').textContent = p.moq;
-  }
-
-  currentImages = (p.images && p.images.length) ? p.images : (p.img ? [p.img] : []);
-  var fallbackEmoji = p.category === 'Frozen' ? '🧊' : '🍚';
-  var mainWrap = document.getElementById('pdMainImgWrap');
-
-  if (currentImages.length) {
-    var mainImg = document.createElement('img');
-    mainImg.id = 'pdMainImg';
-    mainImg.alt = p.name || '';
-    mainImg.onerror = function(){ mainWrap.innerHTML = '<div class="pd-gallery-fallback">' + fallbackEmoji + '</div>'; };
-    mainImg.src = currentImages[0];
-    mainWrap.innerHTML = '';
-    mainWrap.appendChild(mainImg);
-  } else {
-    mainWrap.innerHTML = '<div class="pd-gallery-fallback">' + fallbackEmoji + '</div>';
-  }
-
-  var thumbsWrap = document.getElementById('pdThumbs');
-  thumbsWrap.innerHTML = '';
-  if (currentImages.length > 1) {
-    currentImages.forEach(function(src, i){
-      var t = document.createElement('div');
-      t.className = 'pd-thumb' + (i === 0 ? ' active' : '');
-      var im = document.createElement('img');
-      im.src = src; im.alt = '';
-      t.appendChild(im);
-      t.addEventListener('click', function(){ setMainImage(i); });
-      thumbsWrap.appendChild(t);
+function buildCard(p) {
+  var card = document.createElement('div');
+  card.className = 'preview-card';
+  if (p.id != null) {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function(){
+      window.location.href = 'product.html?id=' + p.id;
     });
   }
 
-  var inquireBtn = document.getElementById('pdInquireBtn');
-  inquireBtn.href = 'index.html?product=' + encodeURIComponent(p.name) + '#contact';
-}
-
-function buildRelatedCard(p) {
-  var a = document.createElement('a');
-  a.href = 'product.html?id=' + p.id;
-  a.className = 'preview-card';
-  a.style.display = 'block';
-
   var imgWrap = document.createElement('div');
   imgWrap.className = 'preview-image';
+
+  // Build image list — use p.images if available, else fall back to p.img
+  var imgs = (p.images && p.images.length) ? p.images : (p.img ? [p.img] : []);
   var fallbackEmoji = p.category === 'Frozen' ? '🧊' : '🍚';
-  if (p.img) {
+
+  if (imgs.length > 1) {
+    // Multi-image carousel
+    var carousel = document.createElement('div');
+    carousel.className = 'preview-carousel';
+
+    var slides = document.createElement('div');
+    slides.className = 'carousel-slides';
+    var currentSlide = 0;
+
+    imgs.forEach(function(src, i) {
+      var slide = document.createElement('div');
+      slide.className = 'carousel-slide';
+      var im = document.createElement('img');
+      im.alt = (p.name || '') + ' ' + (i+1);
+      im.onerror = function() {
+        slide.innerHTML = '';
+        var fb = document.createElement('div');
+        fb.className = 'preview-image-fallback';
+        fb.textContent = fallbackEmoji;
+        slide.appendChild(fb);
+      };
+      im.src = src;
+      slide.appendChild(im);
+      slides.appendChild(slide);
+    });
+    carousel.appendChild(slides);
+
+    // Prev / Next
+    var prev = document.createElement('button');
+    prev.className = 'carousel-prev';
+    prev.innerHTML = '&#8249;';
+    prev.title = 'Previous';
+    var next = document.createElement('button');
+    next.className = 'carousel-next';
+    next.innerHTML = '&#8250;';
+    next.title = 'Next';
+
+    // Dots
+    var dots = document.createElement('div');
+    dots.className = 'carousel-dots';
+    var dotEls = [];
+    imgs.forEach(function(_, i) {
+      var dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i===0?' active':'');
+      dot.onclick = (function(idx){ return function(e){ e.stopPropagation(); goSlide(idx); }; })(i);
+      dots.appendChild(dot);
+      dotEls.push(dot);
+    });
+
+    function goSlide(idx) {
+      currentSlide = (idx + imgs.length) % imgs.length;
+      slides.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+      dotEls.forEach(function(d,i){ d.className = 'carousel-dot'+(i===currentSlide?' active':''); });
+    }
+
+    prev.onclick = function(e){ e.stopPropagation(); goSlide(currentSlide - 1); };
+    next.onclick = function(e){ e.stopPropagation(); goSlide(currentSlide + 1); };
+
+    carousel.appendChild(prev);
+    carousel.appendChild(next);
+    carousel.appendChild(dots);
+    imgWrap.appendChild(carousel);
+
+  } else if (imgs.length === 1) {
+    // Single image
     var img = document.createElement('img');
     img.alt = p.name || '';
-    img.onerror = function(){
+    img.onerror = function() {
       imgWrap.innerHTML = '';
       var fb = document.createElement('div');
       fb.className = 'preview-image-fallback';
       fb.textContent = fallbackEmoji;
       imgWrap.appendChild(fb);
+      if (p.badge) addBadge(imgWrap, p.badge);
     };
-    img.src = p.img;
+    img.src = imgs[0];
     imgWrap.appendChild(img);
   } else {
+    // No image fallback
     var fb = document.createElement('div');
     fb.className = 'preview-image-fallback';
     fb.textContent = fallbackEmoji;
     imgWrap.appendChild(fb);
   }
-  if (p.badge) {
-    var b = document.createElement('div');
-    b.className = 'preview-badge';
-    b.textContent = p.badge;
-    imgWrap.appendChild(b);
-  }
-  a.appendChild(imgWrap);
+
+  if (p.badge) addBadge(imgWrap, p.badge);
+  card.appendChild(imgWrap);
 
   var body = document.createElement('div');
   body.className = 'preview-body';
+
   var cat = document.createElement('div');
-  cat.className = 'preview-cat'; cat.textContent = p.category || '';
+  cat.className = 'preview-cat';
+  cat.textContent = p.category || '';
   body.appendChild(cat);
+
   var name = document.createElement('div');
-  name.className = 'preview-name'; name.textContent = p.name || '';
+  name.className = 'preview-name';
+  name.textContent = p.name || '';
   body.appendChild(name);
+
   if (p.nameVn) {
     var vn = document.createElement('div');
-    vn.className = 'preview-vn'; vn.textContent = p.nameVn;
+    vn.className = 'preview-vn';
+    vn.textContent = p.nameVn;
     body.appendChild(vn);
   }
-  a.appendChild(body);
-  return a;
+
+  var desc = document.createElement('div');
+  desc.className = 'preview-desc';
+  desc.textContent = p.desc || '';
+  desc.title = 'Click to read more';
+  desc.addEventListener('click', function(e){
+    e.stopPropagation();
+    desc.classList.toggle('expanded');
+  });
+  body.appendChild(desc);
+
+  // MOQ tag
+  if (p.moq) {
+    var moqTag = document.createElement('div');
+    moqTag.className = 'preview-moq';
+    moqTag.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg> MOQ: ' + p.moq;
+    body.appendChild(moqTag);
+  }
+
+  var foot = document.createElement('div');
+  foot.className = 'preview-foot';
+
+  var origin = document.createElement('div');
+  origin.className = 'preview-origin';
+  origin.textContent = '📍 ' + (p.origin || 'Vietnam');
+  foot.appendChild(origin);
+
+  var link = document.createElement('a');
+  link.className = 'preview-link';
+  link.href = 'index.html?product=' + encodeURIComponent(p.name || '') + '#contact';
+  link.innerHTML = 'Inquire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>';
+  link.addEventListener('click', function(e){ e.stopPropagation(); });
+  foot.appendChild(link);
+
+  body.appendChild(foot);
+  card.appendChild(body);
+  return card;
 }
 
-async function loadRelated(category, excludeId) {
-  if (!supabaseClient) return;
-  try {
-    var res = await supabaseClient.from('products').select('*').eq('category', category).neq('id', excludeId).limit(4);
-    if (res.error || !res.data || !res.data.length) return;
-    var grid = document.getElementById('pdRelatedGrid');
-    res.data.map(rowToProduct).forEach(function(p){ grid.appendChild(buildRelatedCard(p)); });
-    document.getElementById('pdRelatedSection').style.display = 'block';
-  } catch (e) { /* related products are a nice-to-have, fail silently */ }
+function addBadge(parent, text) {
+  var b = document.createElement('div');
+  b.className = 'preview-badge';
+  b.textContent = text;
+  parent.appendChild(b);
 }
 
-async function loadProduct() {
-  var id = getIdFromUrl();
-  if (!id || !supabaseClient) { showError(); return; }
-  try {
-    var res = await supabaseClient.from('products').select('*').eq('id', id).single();
-    if (res.error || !res.data) { showError(); return; }
-    var p = rowToProduct(res.data);
-    renderProduct(p);
-    loadRelated(p.category, p.id);
-  } catch (e) { showError(); }
-}
 
 // ── Contact float (WhatsApp / Zalo / WeChat / Email) ──
 function toggleContactFloat(){ document.getElementById('contactFloat').classList.toggle('open'); }
@@ -1752,7 +1768,7 @@ document.getElementById('navToggle').addEventListener('click', function(){
   document.getElementById('navMenu').classList.toggle('open');
 });
 
-loadProduct();
+loadCatalog();
 </script>
 </body>
 </html>

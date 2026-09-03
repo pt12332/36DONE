@@ -1611,8 +1611,17 @@ function buildCard(p) {
       var slide = document.createElement('div');
       slide.className = 'carousel-slide';
       var im = document.createElement('img');
+      // Only the first slide is visible without interaction — keep it eager so
+      // it's never gated behind a lazy-load trigger. Off-canvas slides (2+) are lazy.
+      im.loading = (i === 0 ? 'eager' : 'lazy');
+      im.decoding = 'async';
       im.alt = (p.name || '') + ' ' + (i+1);
       im.onerror = function() {
+        if (!im.dataset.retried) {
+          im.dataset.retried = '1';
+          setTimeout(function(){ im.src = src + (src.indexOf('?') > -1 ? '&' : '?') + 'retry=' + Date.now(); }, 700);
+          return;
+        }
         slide.innerHTML = '';
         var fb = document.createElement('div');
         fb.className = 'preview-image-fallback';
@@ -1684,8 +1693,15 @@ function buildCard(p) {
   } else if (imgs.length === 1) {
     // Single image
     var img = document.createElement('img');
+    img.loading = 'lazy';
+    img.decoding = 'async';
     img.alt = p.name || '';
     img.onerror = function() {
+      if (!img.dataset.retried) {
+        img.dataset.retried = '1';
+        setTimeout(function(){ img.src = imgs[0] + (imgs[0].indexOf('?') > -1 ? '&' : '?') + 'retry=' + Date.now(); }, 700);
+        return;
+      }
       imgWrap.innerHTML = '';
       var fb = document.createElement('div');
       fb.className = 'preview-image-fallback';

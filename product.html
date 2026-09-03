@@ -1585,12 +1585,38 @@ function getIdFromUrl() {
 }
 
 var currentImages = [];
+var currentImageIndex = 0;
 
 function setMainImage(i) {
+  currentImageIndex = i;
   var mainImg = document.getElementById('pdMainImg');
   if (mainImg) mainImg.src = currentImages[i];
   document.querySelectorAll('.pd-thumb').forEach(function(t, idx){ t.classList.toggle('active', idx === i); });
 }
+
+// Touch swipe support on the main gallery image
+(function(){
+  var wrap = document.getElementById('pdMainImgWrap');
+  var touchStartX = 0, touchDeltaX = 0, isSwiping = false;
+  wrap.style.touchAction = 'pan-y';
+  wrap.addEventListener('touchstart', function(e){
+    touchStartX = e.touches[0].clientX;
+    touchDeltaX = 0;
+    isSwiping = true;
+  }, { passive: true });
+  wrap.addEventListener('touchmove', function(e){
+    if (!isSwiping) return;
+    touchDeltaX = e.touches[0].clientX - touchStartX;
+  }, { passive: true });
+  wrap.addEventListener('touchend', function(){
+    if (!isSwiping || currentImages.length < 2) return;
+    isSwiping = false;
+    if (Math.abs(touchDeltaX) > 40) {
+      var dir = touchDeltaX < 0 ? 1 : -1;
+      setMainImage((currentImageIndex + dir + currentImages.length) % currentImages.length);
+    }
+  });
+})();
 
 function showError(){
   document.getElementById('pdLoading').style.display = 'none';

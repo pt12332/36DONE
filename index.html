@@ -2110,6 +2110,26 @@ function buildCard(p) {
     prev.onclick = function(e){ e.stopPropagation(); goSlide(currentSlide - 1); };
     next.onclick = function(e){ e.stopPropagation(); goSlide(currentSlide + 1); };
 
+    // Touch swipe support
+    var touchStartX = 0, touchDeltaX = 0, isSwiping = false;
+    carousel.style.touchAction = 'pan-y';
+    carousel.addEventListener('touchstart', function(e){
+      touchStartX = e.touches[0].clientX;
+      touchDeltaX = 0;
+      isSwiping = true;
+    }, { passive: true });
+    carousel.addEventListener('touchmove', function(e){
+      if (!isSwiping) return;
+      touchDeltaX = e.touches[0].clientX - touchStartX;
+    }, { passive: true });
+    carousel.addEventListener('touchend', function(){
+      if (!isSwiping) return;
+      isSwiping = false;
+      if (Math.abs(touchDeltaX) > 40) {
+        goSlide(currentSlide + (touchDeltaX < 0 ? 1 : -1));
+      }
+    });
+
     carousel.appendChild(prev);
     carousel.appendChild(next);
     carousel.appendChild(dots);
